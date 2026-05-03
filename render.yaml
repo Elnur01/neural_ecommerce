@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: neural-ecommerce-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    plan: free
+    region: frankfurt # Change if needed
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Set securely in Render dashboard
+      - key: DIRECT_URL
+        sync: false # Set securely in Render dashboard
+      - key: SUPABASE_URL
+        sync: false # Set securely in Render dashboard
+      - key: SUPABASE_ANON_KEY
+        sync: false # Set securely in Render dashboard
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false # Set securely in Render dashboard
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false # e.g., https://your-vercel-domain.vercel.app
