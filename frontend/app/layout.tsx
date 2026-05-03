@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import TrackerProvider from "@/components/TrackerProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,8 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-        <Navbar />
-        <main className="flex-1">{children}</main>
+        <TrackerProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </TrackerProvider>
       </body>
     </html>
   );

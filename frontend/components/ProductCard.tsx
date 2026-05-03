@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCartStore } from "@/lib/store";
+import tracker from "@/lib/tracker";
 import type { Product } from "@/types";
 import { useState } from "react";
 
@@ -22,6 +23,12 @@ export default function ProductCard({ product }: Props) {
     e.stopPropagation();
     setAdding(true);
     await addToCart(product.product_id);
+    tracker.track("add_to_cart", {
+      product_id: product.product_id,
+      product_price: product.price,
+      discount_rate: product.discount_rate,
+    });
+    tracker.incrementCartAction();
     setAdding(false);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
