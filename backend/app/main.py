@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import auth, products, cart, orders, events, reviews
+from app.routers import auth, products, cart, orders, events, reviews, coupons
 
 # ── App instance ──────────────────────────────────────────────────────
 app = FastAPI(
@@ -34,6 +34,7 @@ app.include_router(cart.router, prefix="/cart", tags=["Cart"])
 app.include_router(orders.router, prefix="/orders", tags=["Orders"])
 app.include_router(events.router, prefix="/events", tags=["Events"])
 app.include_router(reviews.router, prefix="/reviews", tags=["Reviews"])
+app.include_router(coupons.router, prefix="/coupons", tags=["Coupons"])
 
 
 # ── Health check ──────────────────────────────────────────────────────

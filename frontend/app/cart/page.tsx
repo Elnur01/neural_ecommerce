@@ -22,7 +22,7 @@ export default function CartPage() {
     if (!couponCode.trim()) return;
     setCouponLoading(true);
     try {
-      const { data } = await api.post<CouponValidation>("/reviews/../coupons/validate", { code: couponCode });
+      const { data } = await api.post<CouponValidation>("/coupons/validate", { code: couponCode });
       setCouponResult(data);
     } catch {
       setCouponResult({ valid: false, discount_pct: null, message: "Failed to validate coupon." });
