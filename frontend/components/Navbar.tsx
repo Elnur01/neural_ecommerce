@@ -133,7 +133,7 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link href="/onboarding" className="btn btn-primary btn-sm">
+              <Link href="/consent" className="btn btn-primary btn-sm">
                 Get Started
               </Link>
             )}
@@ -177,7 +177,7 @@ export default function Navbar() {
                   Profile
                 </Link>
               ) : (
-                <Link href="/onboarding" onClick={() => setMobileOpen(false)} className="btn btn-primary btn-sm mx-4">
+                <Link href="/consent" onClick={() => setMobileOpen(false)} className="btn btn-primary btn-sm mx-4">
                   Get Started
                 </Link>
               )}
