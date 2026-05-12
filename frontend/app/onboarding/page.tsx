@@ -11,6 +11,13 @@ const CITIES = [
   "Bursa", "Antalya", "Adana", "Bolu", "Igdir", "Rize", "Trabzon", "Van", "Mus",
 ];
 
+async function sha256(message: string) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export default function OnboardingPage() {
   const router = useRouter();
   const { setToken } = useAuthStore();
@@ -38,9 +45,14 @@ export default function OnboardingPage() {
     setLoading(true);
     setError("");
     try {
-      const { data } = await api.post<TokenResponse>("/auth/signup", form);
+      const fingerprintRaw = navigator.userAgent + `${screen.width}x${screen.height}` + Intl.DateTimeFormat().resolvedOptions().timeZone + navigator.language;
+      const fingerprint = await sha256(fingerprintRaw);
+      const lang = navigator.language.startsWith('tr') ? 'tr' : 'en';
+
+      const finalForm = { ...form, device_fingerprint: fingerprint, lang };
+      const { data } = await api.post<TokenResponse>("/auth/signup", finalForm);
       setToken(data.access_token);
-      router.push("/shop");
+      router.push("/scenario");
     } catch (err: any) {
       setError(err.response?.data?.detail || "Registration failed. Please try again.");
     } finally {

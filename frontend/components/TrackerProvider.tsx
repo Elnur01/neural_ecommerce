@@ -14,13 +14,20 @@ import { useCartStore, useAuthStore } from "@/lib/store";
 export default function TrackerProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { cart } = useCartStore();
-  const { isAuthenticated } = useAuthStore();
+  const token = useAuthStore((state) => state.token);
 
-  // Initialize tracker on mount
+  // Initialize tracker when authenticated
   useEffect(() => {
-    if (isAuthenticated()) {
+    if (token) {
       tracker.init();
     }
+    return () => {
+      // Don't destroy immediately on token change to allow flush, but cleanup on unmount
+    };
+  }, [token]);
+
+  // Clean up exactly once on unmount
+  useEffect(() => {
     return () => tracker.destroy();
   }, []);
 
@@ -37,10 +44,10 @@ export default function TrackerProvider({ children }: { children: React.ReactNod
 
   // Track route changes
   useEffect(() => {
-    if (isAuthenticated()) {
+    if (token) {
       tracker.onRouteChange(pathname);
     }
-  }, [pathname]);
+  }, [pathname, token]);
 
   return <>{children}</>;
 }

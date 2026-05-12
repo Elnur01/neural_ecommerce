@@ -72,7 +72,20 @@ export default function ProfilePage() {
         <div className="text-white">
           <p className="text-sm opacity-80 mb-1">Credit Balance</p>
           <p className="text-4xl font-bold">{user.credit_balance.toLocaleString("tr-TR")} ₺</p>
-          <p className="text-sm opacity-60 mt-2">Simulated wallet for research purposes</p>
+          <p className="text-sm opacity-60 mt-2">
+            Your initial budget of <strong>{user.credit_balance_initial?.toLocaleString()} TRY</strong> was assigned based on your age group <strong>({user.age_group})</strong> and loyalty tier <strong>({user.loyalty_tier})</strong>, reflecting average disposable income for Turkish online shoppers in this segment.
+          </p>
+        </div>
+      </div>
+
+      {/* Scenario Transparency */}
+      <div className="mb-8 card p-6 bg-indigo-50 border-indigo-100 border">
+        <h2 className="text-xl font-bold mb-2 text-indigo-900">Your Research Scenario</h2>
+        <p className="text-sm mb-4 text-indigo-800">
+          You were assigned the <strong>"{user.scenario_label}"</strong> scenario. Your assigned budget reflects the spending capacity of a {user.age_group} year-old {user.loyalty_tier}-tier shopper.
+        </p>
+        <div className="bg-white p-4 rounded-lg border border-indigo-100">
+          <p className="text-sm text-gray-700 whitespace-pre-wrap">{user.scenario_text_shown}</p>
         </div>
       </div>
 

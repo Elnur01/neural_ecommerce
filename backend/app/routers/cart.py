@@ -33,6 +33,7 @@ def _build_cart_response(cart: Cart, db: DBSession) -> CartOut:
                 product_name=product.name if product else None,
                 product_price=float(product.price) if product else None,
                 product_discount_rate=product.discount_rate if product else None,
+                product_image_url=product.image_urls[0] if product and product.image_urls else None,
                 quantity=item.quantity,
             )
         )

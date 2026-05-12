@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCartStore, useAuthStore } from "@/lib/store";
 import api from "@/lib/api";
 import type { CouponValidation } from "@/types";
+import tracker from "@/lib/tracker";
 
 export default function CartPage() {
   const { cart, fetchCart, updateQuantity, removeItem, loading } = useCartStore();
@@ -24,8 +25,22 @@ export default function CartPage() {
     try {
       const { data } = await api.post<CouponValidation>("/coupons/validate", { code: couponCode });
       setCouponResult(data);
+      tracker.markCouponSearched("apply", {
+        code_attempted: couponCode,
+        apply_success: data.valid,
+        discount_amount: data.valid && data.discount_pct && cart ? cart.subtotal * data.discount_pct : 0,
+        cart_total_at_event: cart?.subtotal || 0,
+        items_in_cart: cart?.items.length || 0,
+      });
     } catch {
       setCouponResult({ valid: false, discount_pct: null, message: "Failed to validate coupon." });
+      tracker.markCouponSearched("apply", {
+        code_attempted: couponCode,
+        apply_success: false,
+        discount_amount: 0,
+        cart_total_at_event: cart?.subtotal || 0,
+        items_in_cart: cart?.items.length || 0,
+      });
     } finally {
       setCouponLoading(false);
     }
@@ -57,8 +72,12 @@ export default function CartPage() {
             const effectivePrice = (item.product_price || 0) * (1 - (item.product_discount_rate || 0));
             return (
               <div key={item.id} className="card p-4 flex gap-4 items-center">
-                <div className="w-20 h-20 rounded-xl flex items-center justify-center text-3xl shrink-0" style={{ background: "var(--surface-raised)" }}>
-                  🛍️
+                <div className="w-20 h-20 rounded-xl flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "var(--surface-raised)", border: "1px solid var(--border)" }}>
+                  {item.product_image_url ? (
+                    <img src={item.product_image_url} alt={item.product_name || ""} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-3xl">🛍️</span>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-sm truncate" style={{ color: "var(--text-primary)" }}>{item.product_name}</h3>
@@ -74,7 +93,20 @@ export default function CartPage() {
                 {/* Quantity controls */}
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => item.quantity > 1 ? updateQuantity(item.id, item.quantity - 1) : removeItem(item.id)}
+                    onClick={() => {
+                      if (item.quantity > 1) {
+                        updateQuantity(item.id, item.quantity - 1);
+                      } else {
+                        if (cart) {
+                          tracker.recordRemoveFromCart(
+                            item,
+                            cart.subtotal - (item.product_price || 0) * item.quantity,
+                            cart.items.length - 1
+                          );
+                        }
+                        removeItem(item.id);
+                      }
+                    }}
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium"
                     style={{ background: "var(--surface-raised)", color: "var(--text-secondary)" }}
                   >
@@ -96,7 +128,16 @@ export default function CartPage() {
                   </span>
                 </div>
                 {/* Remove */}
-                <button onClick={() => removeItem(item.id)} className="p-1.5 rounded-lg hover:bg-red-50" title="Remove">
+                <button onClick={() => {
+                  if (cart) {
+                    tracker.recordRemoveFromCart(
+                      item,
+                      cart.subtotal - (item.product_price || 0) * item.quantity,
+                      cart.items.length - 1
+                    );
+                  }
+                  removeItem(item.id);
+                }} className="p-1.5 rounded-lg hover:bg-red-50" title="Remove">
                   <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -117,6 +158,12 @@ export default function CartPage() {
                 type="text"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                onFocus={() =>
+                  tracker.markCouponSearched("focus", {
+                    cart_total_at_event: cart?.subtotal || 0,
+                    items_in_cart: cart?.items.length || 0,
+                  })
+                }
                 placeholder="Coupon code"
                 className="input flex-1"
               />

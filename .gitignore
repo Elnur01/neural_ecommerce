@@ -8,6 +8,7 @@ env/
 *.egg
 dist/
 build/
+.pytest_cache/
 
 # ── Node ──────────────────────────────────────────────────────────────
 node_modules/
@@ -19,6 +20,7 @@ out/
 .env
 .env.local
 .env.production
+.env.*.local
 
 # ── IDE ───────────────────────────────────────────────────────────────
 .vscode/
@@ -30,3 +32,20 @@ out/
 # ── Research exports ──────────────────────────────────────────────────
 research/exports/*.csv
 research/exports/*.parquet
+
+# ── Testing artifacts ─────────────────────────────────────────────────
+frontend/playwright-report/
+frontend/test-results/
+frontend/.playwright/
+
+# ── Backend runtime ───────────────────────────────────────────────────
+backend/uploads/
+
+# ── Root-level scratch / ad-hoc test scripts ──────────────────────────
+test_events.py
+test_events_trace.py
+test_ingest.py
+test_ingest2.py
+test_ingest3.py
+test_post_events.py
+test_signup.py

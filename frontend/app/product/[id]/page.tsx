@@ -117,15 +117,24 @@ export default function ProductDetailPage() {
 
       {/* Product grid */}
       <div className="grid md:grid-cols-2 gap-12 mb-16">
-        {/* Image */}
-        <div className="aspect-square rounded-2xl flex items-center justify-center text-8xl" style={{ background: "var(--surface-raised)", border: "1px solid var(--border)" }}>
-          {product.category === "Phones" && "📱"}
-          {product.category === "Laptops" && "💻"}
-          {product.category === "Headphones" && "🎧"}
-          {product.category === "Smartwatches" && "⌚"}
-          {product.category === "Cameras" && "📷"}
-          {product.category === "Accessories" && "🎮"}
-        </div>
+        {/* Image or Placeholder */}
+        {product.image_urls && product.image_urls.length > 0 ? (
+          <img
+            src={product.image_urls[0]}
+            alt={product.name}
+            className="w-full h-full object-cover rounded-2xl"
+            style={{ border: "1px solid var(--border)" }}
+          />
+        ) : (
+          <div className="aspect-square rounded-2xl flex items-center justify-center text-8xl" style={{ background: "var(--surface-raised)", border: "1px solid var(--border)" }}>
+            {product.category === "Phones" && "📱"}
+            {product.category === "Laptops" && "💻"}
+            {product.category === "Headphones" && "🎧"}
+            {product.category === "Smartwatches" && "⌚"}
+            {product.category === "Cameras" && "📷"}
+            {product.category === "Accessories" && "🎮"}
+          </div>
+        )}
 
         {/* Details */}
         <div>

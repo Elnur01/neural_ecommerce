@@ -61,6 +61,21 @@ class User(Base):
 
     # ── Wallet ────────────────────────────────────────────────────────
     credit_balance = Column(Numeric(12, 2), default=12000.00)
+    credit_balance_initial = Column(Numeric(12, 2), nullable=False, default=12000.00)
+    budget_matrix_version = Column(String(10), nullable=False, default="v1")
+
+    # ── Scenario & Tracking (WP-4 & WP-5) ─────────────────────────────
+    scenario_id = Column(String(50), nullable=False, default="unassigned")
+    scenario_label = Column(String(100), nullable=False, default="unassigned")
+    scenario_intent_level = Column(String(20), nullable=False, default="low")
+    scenario_text_shown = Column(Text, nullable=False, default="")
+    scenario_text_lang = Column(String(10), nullable=False, default="en")
+    scenario_text_version = Column(String(10), nullable=False, default="v1")
+    scenario_acknowledged_at = Column(DateTime(timezone=True))
+    scenario_read_time_sec = Column(Integer)
+    device_fingerprint = Column(String(256))
+    lottery_eligible = Column(Boolean, default=True)
+    contact_email_for_lottery = Column(String(255))
 
     # ── Raw signup inputs (kept for transparency page) ────────────────
     raw_age = Column(Integer)
@@ -87,9 +102,12 @@ class Product(Base):
     category = Column(String(50), nullable=False, index=True)
     price = Column(Numeric(10, 2), nullable=False)
     discount_rate = Column(Float, default=0.0)  # 0.0 – 0.3
+    discount_ends_at = Column(DateTime(timezone=True))
+    image_count = Column(Integer, default=0)
     image_urls = Column(JSON, default=list)     # list of URL strings
     description = Column(Text)
     stock_simulated = Column(Integer, default=100)
+    stock_remaining = Column(Integer)
     avg_rating = Column(Float, default=0.0)
     review_count = Column(Integer, default=0)
 
@@ -124,7 +142,11 @@ class Session(Base):
     started_at = Column(DateTime(timezone=True), server_default=func.now())
     ended_at = Column(DateTime(timezone=True), nullable=True)
     user_agent = Column(Text)
-    abandonment_status = Column(Boolean, default=True)
+    abandonment_stage = Column(String(50))
+    scenario_id = Column(String(50))
+    scenario_recall_correct = Column(Boolean)
+    mission_alignment_score = Column(Float)
+    mission_completed_inferred = Column(Boolean)
 
     user = relationship("User", back_populates="sessions")
     events = relationship("Event", back_populates="session")
@@ -144,6 +166,7 @@ class Event(Base):
     event_type = Column(String(50), nullable=False, index=True)
     page_url = Column(String(500))
     product_id = Column(UUID(as_uuid=True), nullable=True)
+    scenario_id = Column(String(50))
 
     # ── Per-event metadata ────────────────────────────────────────────
     time_on_page_sec = Column(Float, default=0)
@@ -160,7 +183,11 @@ class Event(Base):
     search_bar_used = Column(Boolean, default=False)
     coupon_applied = Column(Boolean, default=False)
     shipping_fee = Column(Numeric(8, 2), default=0)
-    abandonment_status = Column(Boolean, nullable=True)
+    abandonment_stage = Column(String(50))
+    budget_utilization_pct = Column(Float)
+    time_since_session_start_sec = Column(Float)
+    image_index = Column(Integer)
+    total_images_available = Column(Integer)
 
     session = relationship("Session", back_populates="events")
 
@@ -235,3 +262,30 @@ class Coupon(Base):
     valid_until = Column(DateTime(timezone=True), nullable=False)
     usage_limit = Column(Integer, default=100)
     times_used = Column(Integer, default=0)
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# POST SESSION SURVEY
+# ═══════════════════════════════════════════════════════════════════════
+class PostSessionSurvey(Base):
+    __tablename__ = "post_session_survey"
+
+    survey_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    customer_id = Column(UUID(as_uuid=True), ForeignKey("users.customer_id"), nullable=False)
+    session_id = Column(UUID(as_uuid=True), ForeignKey("sessions.session_id"), nullable=False)
+    scenario_id = Column(String(50))
+    survey_lang = Column(String(10))
+    intent_to_buy = Column(String(50))
+    completed_purchase = Column(Boolean)
+    abandonment_reason = Column(Text)
+    abandonment_reason_other = Column(Text)
+    mission_completed_self_report = Column(String(50))
+    mission_recall_text = Column(Text)
+    scenario_realism_score = Column(Integer)
+    overall_realism_score = Column(Integer)
+    free_text = Column(Text)
+    submitted_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")
+    session = relationship("Session")
+

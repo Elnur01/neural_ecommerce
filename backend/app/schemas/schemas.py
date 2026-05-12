@@ -22,6 +22,8 @@ class SignupRequest(BaseModel):
     monthly_shopping_frequency: int = Field(..., ge=0)
     last_online_purchase_date: date
     save_card: str = Field(..., pattern="^(yes|no)$")
+    device_fingerprint: Optional[str] = None
+    lang: str = "en"
 
 
 class LoginRequest(BaseModel):
@@ -53,6 +55,14 @@ class UserProfile(BaseModel):
     raw_age: Optional[int] = None
     monthly_shopping_frequency: int = 0
     created_at: Optional[datetime] = None
+    
+    # WP-4 Scenario fields
+    scenario_id: Optional[str] = None
+    scenario_label: Optional[str] = None
+    scenario_intent_level: Optional[str] = None
+    scenario_text_shown: Optional[str] = None
+    scenario_text_lang: Optional[str] = None
+    scenario_text_version: Optional[str] = None
 
     model_config = {"from_attributes": True}
 
@@ -120,6 +130,7 @@ class CartItemOut(BaseModel):
     product_name: Optional[str] = None
     product_price: Optional[float] = None
     product_discount_rate: Optional[float] = None
+    product_image_url: Optional[str] = None
     quantity: int
 
     model_config = {"from_attributes": True}
@@ -145,6 +156,7 @@ class OrderCreate(BaseModel):
 class OrderItemOut(BaseModel):
     product_id: uuid.UUID
     product_name: Optional[str] = None
+    product_image_url: Optional[str] = None
     quantity: int
     unit_price: float
 
@@ -185,7 +197,12 @@ class EventCreate(BaseModel):
     search_bar_used: bool = False
     coupon_applied: bool = False
     shipping_fee: float = 0
-    abandonment_status: Optional[bool] = None
+    scenario_id: Optional[str] = None
+    abandonment_stage: Optional[str] = None
+    budget_utilization_pct: Optional[float] = None
+    time_since_session_start_sec: Optional[float] = None
+    image_index: Optional[int] = None
+    total_images_available: Optional[int] = None
 
 
 class EventBatchCreate(BaseModel):
@@ -209,4 +226,5 @@ class CouponValidateResponse(BaseModel):
 # SESSIONS
 # ═══════════════════════════════════════════════════════════════════════
 class SessionCreate(BaseModel):
+    session_id: uuid.UUID
     user_agent: Optional[str] = None

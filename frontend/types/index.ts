@@ -12,6 +12,8 @@ export interface SignupPayload {
   monthly_shopping_frequency: number;
   last_online_purchase_date: string; // ISO date string
   save_card: "yes" | "no";
+  device_fingerprint?: string;
+  lang?: string;
 }
 
 export interface LoginPayload {
@@ -40,9 +42,17 @@ export interface UserProfile {
   payment_method_saved: boolean;
   last_purchase_date: string | null;
   credit_balance: number;
+  credit_balance_initial: number;
   raw_age: number | null;
   monthly_shopping_frequency: number;
   created_at: string | null;
+  
+  scenario_id?: string;
+  scenario_label?: string;
+  scenario_intent_level?: string;
+  scenario_text_shown?: string;
+  scenario_text_lang?: string;
+  scenario_text_version?: string;
 }
 
 // ── Products ─────────────────────────────────────────────────────
@@ -73,6 +83,7 @@ export interface CartItem {
   product_name: string | null;
   product_price: number | null;
   product_discount_rate: number | null;
+  product_image_url: string | null;
   quantity: number;
 }
 
@@ -88,6 +99,7 @@ export interface Cart {
 export interface OrderItem {
   product_id: string;
   product_name: string | null;
+  product_image_url: string | null;
   quantity: number;
   unit_price: number;
 }

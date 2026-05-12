@@ -52,15 +52,23 @@ export default function ProductCard({ product }: Props) {
             </div>
           )}
 
-          {/* Placeholder product icon */}
-          <div className="w-full h-full flex items-center justify-center text-6xl opacity-40 group-hover:scale-110 transition-transform duration-500">
-            {product.category === "Phones" && "📱"}
-            {product.category === "Laptops" && "💻"}
-            {product.category === "Headphones" && "🎧"}
-            {product.category === "Smartwatches" && "⌚"}
-            {product.category === "Cameras" && "📷"}
-            {product.category === "Accessories" && "🎮"}
-          </div>
+          {/* Image or Placeholder */}
+          {product.image_urls && product.image_urls.length > 0 ? (
+            <img
+              src={product.image_urls[0]}
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-6xl opacity-40 group-hover:scale-110 transition-transform duration-500">
+              {product.category === "Phones" && "📱"}
+              {product.category === "Laptops" && "💻"}
+              {product.category === "Headphones" && "🎧"}
+              {product.category === "Smartwatches" && "⌚"}
+              {product.category === "Cameras" && "📷"}
+              {product.category === "Accessories" && "🎮"}
+            </div>
+          )}
 
           {/* Quick add button */}
           <button

@@ -99,6 +99,7 @@ def signup(body: SignupRequest, request: Request, db: DBSession = Depends(get_db
         save_card=body.save_card,
         preferred_device=preferred_device,
         customer_id_seed=str(customer_id),
+        lang=body.lang,
     )
 
     # Create user record
@@ -106,7 +107,7 @@ def signup(body: SignupRequest, request: Request, db: DBSession = Depends(get_db
         customer_id=customer_id,
         email=body.email,
         password_hash=_hash_password(body.password),
-        credit_balance=12000.00,
+        device_fingerprint=body.device_fingerprint,
         **segments,
     )
     db.add(user)

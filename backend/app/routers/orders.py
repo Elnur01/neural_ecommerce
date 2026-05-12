@@ -52,6 +52,7 @@ def create_order(
             "quantity": item.quantity,
             "unit_price": effective_price,
             "product_name": product.name,
+            "product_image_url": product.image_urls[0] if product.image_urls else None,
         })
 
     shipping_fee = Decimal("0") if subtotal >= 1500 else Decimal("50")
@@ -121,6 +122,7 @@ def create_order(
         items_out.append(OrderItemOut(
             product_id=oi_data["product_id"],
             product_name=oi_data["product_name"],
+            product_image_url=oi_data["product_image_url"],
             quantity=oi_data["quantity"],
             unit_price=float(oi_data["unit_price"]),
         ))
@@ -157,6 +159,7 @@ def list_orders(
             items_out.append(OrderItemOut(
                 product_id=oi.product_id,
                 product_name=product.name if product else "Unknown",
+                product_image_url=product.image_urls[0] if product and product.image_urls else None,
                 quantity=oi.quantity,
                 unit_price=float(oi.unit_price),
             ))

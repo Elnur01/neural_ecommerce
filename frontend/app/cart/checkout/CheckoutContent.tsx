@@ -84,8 +84,9 @@ export default function CheckoutContent() {
         </div>
 
         <div className="flex gap-3 justify-center">
-          <Link href="/shop" className="btn btn-primary">Continue Shopping</Link>
-          <Link href="/profile" className="btn btn-ghost">View Profile</Link>
+          <button onClick={() => window.location.href = "/debrief"} className="btn btn-primary">
+            Complete Study
+          </button>
         </div>
       </div>
     );

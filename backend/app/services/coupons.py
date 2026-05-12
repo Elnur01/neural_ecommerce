@@ -21,11 +21,14 @@ def validate_coupon(db: DBSession, code: str) -> dict:
         return {"valid": False, "discount_pct": None, "message": "Coupon code not found."}
 
     now = datetime.now(timezone.utc)
+    
+    valid_from = coupon.valid_from.replace(tzinfo=timezone.utc) if coupon.valid_from.tzinfo is None else coupon.valid_from
+    valid_until = coupon.valid_until.replace(tzinfo=timezone.utc) if coupon.valid_until.tzinfo is None else coupon.valid_until
 
-    if now < coupon.valid_from:
+    if now < valid_from:
         return {"valid": False, "discount_pct": None, "message": "This coupon is not yet active."}
 
-    if now > coupon.valid_until:
+    if now > valid_until:
         return {"valid": False, "discount_pct": None, "message": "This coupon has expired."}
 
     if coupon.times_used >= coupon.usage_limit:

@@ -40,14 +40,13 @@ class Tracker {
   init(): void {
     if (this.initialized || typeof window === "undefined") return;
 
-    // Session ID — persisted in sessionStorage for tab lifetime
-    let existingSession = sessionStorage.getItem("tracker_session_id");
+    let existingSession = sessionStorage.getItem("tracker_session_id_v2");
     if (!existingSession) {
       existingSession = uuidv4();
-      sessionStorage.setItem("tracker_session_id", existingSession);
-      // Register session on backend
-      this.registerSession(existingSession);
+      sessionStorage.setItem("tracker_session_id_v2", existingSession);
     }
+    // Always register session on backend to ensure it exists across DB wipes or user changes
+    this.registerSession(existingSession);
     this.sessionId = existingSession;
 
     // Start page timer
@@ -164,6 +163,34 @@ class Tracker {
     this.counters.coupon_applied = true;
   }
 
+  recordRemoveFromCart(item: any, cartTotalAfter: number, itemsAfter: number) {
+    this.incrementCartAction();
+    this.track('remove_from_cart', {
+      product_id: item.product_id,
+      product_price: item.price,
+      discount_rate: item.discount_rate,
+      quantity_removed: item.quantity,
+      cart_total_at_event: cartTotalAfter,
+      items_in_cart: itemsAfter,
+    });
+  }
+
+  markCouponSearched(
+    trigger: 'focus' | 'apply',
+    payload: {
+      code_attempted?: string;
+      apply_success?: boolean;
+      discount_amount?: number;
+      cart_total_at_event: number;
+      items_in_cart: number;
+    }
+  ) {
+    this.track('coupon_search', { trigger, ...payload });
+    if (trigger === 'apply' && payload.apply_success) {
+      this.markCouponApplied();
+    }
+  }
+
   /**
    * Mark review section as visited.
    */
@@ -185,6 +212,7 @@ class Tracker {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
+          session_id: sessionId,
           user_agent: navigator.userAgent,
         }),
       });
@@ -261,24 +289,19 @@ class Tracker {
 
     const payload = JSON.stringify({ events });
 
-    if (useBeacon && navigator.sendBeacon) {
-      // sendBeacon for tab-close reliability
-      const blob = new Blob([payload], { type: "application/json" });
-      navigator.sendBeacon(`${API_URL}/events`, blob);
-    } else {
-      fetch(`${API_URL}/events`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: payload,
-        keepalive: true,
-      }).catch(() => {
-        // Re-buffer on failure
-        this.buffer.push(...events);
-      });
-    }
+    // sendBeacon cannot set custom headers (like Authorization), so we must use fetch with keepalive
+    fetch(`${API_URL}/events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: payload,
+      keepalive: true,
+    }).catch(() => {
+      // Re-buffer on failure
+      this.buffer.push(...events);
+    });
   }
 }
 

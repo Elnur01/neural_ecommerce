@@ -80,3 +80,39 @@ def get_product(product_id: uuid.UUID, db: DBSession = Depends(get_db)):
             detail="Product not found.",
         )
     return product
+
+from fastapi import UploadFile, File
+import shutil
+import os
+
+@router.post("/{product_id}/images")
+def upload_product_image(
+    product_id: uuid.UUID,
+    file: UploadFile = File(...),
+    db: DBSession = Depends(get_db)
+):
+    """Upload a new image for a product. (Mocked to local storage or external depending on config)"""
+    product = db.query(Product).filter(Product.product_id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found.")
+        
+    # WP-7: For a real setup this would upload to Supabase storage. 
+    # Since we might not have admin rights configured locally, we'll mock it or just save to a local uploads directory
+    # that is served statically, and update the DB array.
+    os.makedirs("uploads", exist_ok=True)
+    file_path = f"uploads/{product_id}_{file.filename}"
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    # Mocking the URL structure. In reality, it should be a full URL or a relative one served by FastAPI.
+    fake_url = f"/api/uploads/{product_id}_{file.filename}"
+    
+    # SQLAlchemy requires re-assignment or append to trigger array update properly depending on dialect.
+    # We will just append.
+    current_urls = list(product.image_urls) if product.image_urls else []
+    current_urls.append(fake_url)
+    product.image_urls = current_urls
+    product.image_count = len(current_urls)
+    
+    db.commit()
+    return {"ok": True, "url": fake_url}
