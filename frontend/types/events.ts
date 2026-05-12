@@ -10,7 +10,11 @@ export type EventType =
   | "coupon_search"
   | "review_section_visit"
   | "order_completed"
-  | "survey_page_loaded";
+  | "survey_page_loaded"
+  | "exit_intent_shown"
+  | "exit_intent_dismissed"
+  | "exit_intent_accepted"
+  | "scenario_recall_modal_opened";
 
 export interface TrackingEvent {
   session_id: string;
@@ -32,6 +36,11 @@ export interface TrackingEvent {
   coupon_applied: boolean;
   shipping_fee: number;
   abandonment_status: boolean | null;
+  quantity_removed?: number;
+  trigger?: string;
+  code_attempted?: string;
+  apply_success?: boolean;
+  discount_amount?: number;
 }
 
 export interface SessionCounters {

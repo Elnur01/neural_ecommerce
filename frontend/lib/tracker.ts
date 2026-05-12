@@ -191,6 +191,10 @@ class Tracker {
     }
   }
 
+  getSessionId(): string {
+    return this.sessionId;
+  }
+
   /**
    * Mark review section as visited.
    */
