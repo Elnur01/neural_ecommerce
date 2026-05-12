@@ -9,7 +9,8 @@ export type EventType =
   | "checkout_start"
   | "coupon_search"
   | "review_section_visit"
-  | "order_completed";
+  | "order_completed"
+  | "survey_page_loaded";
 
 export interface TrackingEvent {
   session_id: string;
