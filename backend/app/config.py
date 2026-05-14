@@ -28,7 +28,15 @@ class Settings:
     )
 
     # ── CORS ──────────────────────────────────────────────────────────
+    # Supports a single URL or comma-separated list, e.g.:
+    # FRONTEND_URL=https://elnur.tr,https://neural-ecommerce.appwrite.network
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
+    @property
+    def allowed_origins(self) -> list[str]:
+        base = [o.strip() for o in self.FRONTEND_URL.split(",") if o.strip()]
+        extras = ["http://localhost:3000", "http://localhost:3001"]
+        return list(dict.fromkeys(base + extras))  # deduplicated, order preserved
 
     # ── General ───────────────────────────────────────────────────────
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
