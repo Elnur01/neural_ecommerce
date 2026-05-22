@@ -40,6 +40,7 @@ class Settings:
 
     # ── General ───────────────────────────────────────────────────────
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
+    SENTRY_DSN: str = os.getenv("SENTRY_DSN", "")
 
 
 settings = Settings()
