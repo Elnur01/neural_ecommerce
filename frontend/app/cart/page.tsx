@@ -137,7 +137,7 @@ export default function CartPage() {
                     );
                   }
                   removeItem(item.id);
-                }} className="p-1.5 rounded-lg hover:bg-red-50" title="Remove">
+                }} className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer" title="Remove">
                   <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -172,7 +172,7 @@ export default function CartPage() {
               </button>
             </div>
             {couponResult && (
-              <div className={`text-xs mb-4 p-2 rounded-lg ${couponResult.valid ? "bg-green-50 text-green-600" : "bg-red-50 text-red-500"}`}>
+              <div className={`text-xs mb-4 p-2 rounded-lg ${couponResult.valid ? "bg-green-50 dark:bg-green-950/20 text-green-600 dark:text-green-400 border border-green-100 dark:border-green-900/30" : "bg-red-50 dark:bg-red-950/20 text-red-500 dark:text-red-400 border border-red-100 dark:border-red-900/30"}`}>
                 {couponResult.message}
               </div>
             )}

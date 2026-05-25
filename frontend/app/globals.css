@@ -1,9 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ═══════════════════════════════════════════════════════════════════
    DESIGN TOKENS
    ═══════════════════════════════════════════════════════════════════ */
 :root {
+  /* ── Color Scheme ────────────────────────────────────────────── */
+  color-scheme: light;
+
   /* ── Brand Palette ──────────────────────────────────────────── */
   --primary: #6C3AED;
   --primary-light: #8B5CF6;
@@ -65,9 +70,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Dark mode ────────────────────────────────────────────────── */
+/* ── Dark mode media query (prefers-color-scheme) ────────────── */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
+    color-scheme: dark;
     --background: #09090B;
     --surface: #18181B;
     --surface-raised: #1E1B2E;
@@ -76,12 +82,51 @@
     --text-primary: #FAFAFA;
     --text-secondary: #A1A1AA;
     --text-muted: #71717A;
+    --gradient-subtle: linear-gradient(135deg, #0F0B1E 0%, #151012 100%);
     --gradient-card: linear-gradient(180deg, rgba(24,24,27,0.9) 0%, rgba(30,27,46,0.6) 100%);
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
     --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
     --shadow-glow: 0 0 20px rgba(139,92,246,0.2);
   }
+}
+
+/* ── Dark mode class override ───────────────────────────────── */
+:root.dark {
+  color-scheme: dark;
+  --background: #09090B;
+  --surface: #18181B;
+  --surface-raised: #1E1B2E;
+  --border: #27272A;
+  --border-light: #1F1F23;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --gradient-subtle: linear-gradient(135deg, #0F0B1E 0%, #151012 100%);
+  --gradient-card: linear-gradient(180deg, rgba(24,24,27,0.9) 0%, rgba(30,27,46,0.6) 100%);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 20px rgba(139,92,246,0.2);
+}
+
+/* ── Light mode class override ──────────────────────────────── */
+:root.light {
+  color-scheme: light;
+  --background: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-raised: #F5F3FF;
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --gradient-subtle: linear-gradient(135deg, #F5F3FF 0%, #FFF7ED 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(245,243,255,0.6) 100%);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --shadow-glow: 0 0 20px rgba(108,58,237,0.15);
 }
 
 /* ═══════════════════════════════════════════════════════════════════

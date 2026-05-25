@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session as DBSession
 
 from app.database import get_db
-from app.models.models import Event, Session, User
+from app.models.models import Event, Session, User, Product, Order
 from app.schemas.schemas import EventBatchCreate, SessionCreate
 from app.routers.auth import get_current_user
 
@@ -120,14 +120,12 @@ def close_session(
     # To determine unique categories, we'd ideally join with products, but here we can just query the DB for the product_ids in the session
     product_ids_visited = {e.product_id for e in events if e.product_id is not None}
     if product_ids_visited:
-        from app.models.models import Product
         visited_products = db.query(Product).filter(Product.product_id.in_(product_ids_visited)).all()
         unique_categories = {p.category for p in visited_products}
         
     purchased_category = None
     if has_order:
         # Get category of purchased item. If multiple, pick first for simplicity.
-        from app.models.models import Order
         order = db.query(Order).filter(Order.customer_id == current_user.customer_id).order_by(Order.created_at.desc()).first()
         if order and order.items:
             purchased_prod = db.query(Product).filter(Product.product_id == order.items[0].product_id).first()

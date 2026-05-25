@@ -11,6 +11,11 @@ export default function Navbar() {
   const { user, fetchUser, isAuthenticated, logout } = useAuthStore();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fetch user & cart on mount if authenticated
   useEffect(() => {
@@ -26,6 +31,49 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (!localStorage.getItem("theme")) {
+        const isDark = mediaQuery.matches;
+        setTheme(isDark ? "dark" : "light");
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("light");
+        } else {
+          document.documentElement.classList.add("light");
+          document.documentElement.classList.remove("dark");
+        }
+      }
+    };
+
+    const initialTheme = localStorage.getItem("theme");
+    if (initialTheme) {
+      setTheme(initialTheme as "light" | "dark");
+    } else {
+      setTheme(mediaQuery.matches ? "dark" : "light");
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   const itemCount = cart?.items?.reduce((sum, i) => sum + i.quantity, 0) || 0;
 
@@ -87,6 +135,26 @@ export default function Navbar() {
 
           {/* Right side: Cart + Profile */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 dark:text-zinc-400 cursor-pointer"
+              aria-label="Toggle theme"
+              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {mounted && theme === "dark" ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m0 13.5V21M7.5 12h-2.25m13.5 0H19.5m-2.25-6.75l-1.591 1.591M8.25 15.75l-1.591 1.591m0-9l1.591 1.591m7.5 7.5l1.591 1.591M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" />
+                </svg>
+              ) : mounted && theme === "light" ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                </svg>
+              ) : (
+                <div className="w-5 h-5" />
+              )}
+            </button>
+
             {/* Cart */}
             <Link
               href="/cart"
@@ -106,7 +174,7 @@ export default function Navbar() {
             </Link>
 
             {/* Profile */}
-            {isAuthenticated() ? (
+            {mounted && isAuthenticated() ? (
               <div className="flex items-center gap-2">
                 <Link
                   href="/profile"
@@ -132,26 +200,50 @@ export default function Navbar() {
                   </svg>
                 </button>
               </div>
-            ) : (
+            ) : mounted && !isAuthenticated() ? (
               <Link href="/consent" className="btn btn-primary btn-sm">
                 Get Started
               </Link>
+            ) : (
+              <div className="h-9 w-24 bg-transparent" />
             )}
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          {/* Mobile buttons */}
+          <div className="flex md:hidden items-center gap-1">
+            {/* Theme Toggle (Mobile) */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 dark:text-zinc-400 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {mounted && theme === "dark" ? (
+                <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m0 13.5V21M7.5 12h-2.25m13.5 0H19.5m-2.25-6.75l-1.591 1.591M8.25 15.75l-1.591 1.591m0-9l1.591 1.591m7.5 7.5l1.591 1.591M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" />
+                </svg>
+              ) : mounted && theme === "light" ? (
+                <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                </svg>
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <div className="w-5.5 h-5.5" />
               )}
-            </svg>
-          </button>
+            </button>
+
+            {/* Mobile hamburger */}
+            <button
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                {mobileOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -172,15 +264,15 @@ export default function Navbar() {
               <Link href="/cart" onClick={() => setMobileOpen(false)} className="px-4 py-2 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                 Cart {itemCount > 0 && `(${itemCount})`}
               </Link>
-              {isAuthenticated() ? (
+              {mounted && isAuthenticated() ? (
                 <Link href="/profile" onClick={() => setMobileOpen(false)} className="px-4 py-2 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                   Profile
                 </Link>
-              ) : (
+              ) : mounted && !isAuthenticated() ? (
                 <Link href="/consent" onClick={() => setMobileOpen(false)} className="btn btn-primary btn-sm mx-4">
                   Get Started
                 </Link>
-              )}
+              ) : null}
             </div>
           </div>
         )}

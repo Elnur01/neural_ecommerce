@@ -40,7 +40,7 @@ export default function ExitIntentModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-slide-up text-center">
+      <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl shadow-xl max-w-md w-full p-6 animate-slide-up text-center">
         <div className="text-4xl mb-4">⚠️</div>
         <h3 className="text-xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>
           {lang === "tr" ? "Çıkmak istediğinizden emin misiniz?" : "Are you sure you want to leave?"}

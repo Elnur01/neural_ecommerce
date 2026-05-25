@@ -21,8 +21,8 @@ export default function AboutPage() {
 
         <h2 className="text-xl font-semibold mt-8 mb-3" style={{ color: "var(--text-primary)" }}>How It Works</h2>
         <p>
-          When you sign up, you receive a <strong style={{ color: "var(--primary)" }}>12,000 TL simulated credit wallet</strong>.
-          This is not real money — it exists only within this platform. You can browse products, add items to your cart,
+          When you sign up, you receive a <strong style={{ color: "var(--primary)" }}>simulated credit wallet (up to 46,000 TL)</strong>.
+          This budget is assigned dynamically based on your demographic segment. It is not real money — it exists only within this platform. You can browse products, add items to your cart,
           apply coupon codes, and complete purchases just like a real e-commerce site.
         </p>
 

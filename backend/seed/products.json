@@ -9,7 +9,7 @@
     "avg_rating": 4.8,
     "review_count": 187,
     "image_urls": [
-      "/products/iphone16promax.webp"
+      "/products/product_images/iPhone_16_Pro_Max.webp"
     ]
   },
   {
@@ -22,7 +22,7 @@
     "avg_rating": 4.7,
     "review_count": 156,
     "image_urls": [
-      "/products/galaxys25ultra.webp"
+      "/products/product_images/Samsung_Galaxy_S25_Ultra.webp"
     ]
   },
   {
@@ -35,9 +35,7 @@
     "avg_rating": 4.6,
     "review_count": 98,
     "image_urls": [
-      "/products/product_images/Google_Pixel_9_Pro.jpg",
-      "/products/product_images/Google_Pixel_9_Pro.png",
-      "/products/product_images/Google_Pixel_9_Pro(1).jpg"
+      "/products/product_images/Google_Pixel_9_Pro.jpg"
     ]
   },
   {
@@ -63,7 +61,7 @@
     "avg_rating": 4.4,
     "review_count": 89,
     "image_urls": [
-      "/products/xiaomi15pro.webp"
+      "/products/product_images/Xiaomi_15_Pro.webp"
     ]
   },
   {
@@ -76,7 +74,7 @@
     "avg_rating": 4.3,
     "review_count": 67,
     "image_urls": [
-      "/products/nothingphone3.webp"
+      "/products/product_images/Nothing_Phone_(3).webp"
     ]
   },
   {
@@ -89,7 +87,7 @@
     "avg_rating": 4.4,
     "review_count": 73,
     "image_urls": [
-      "/products/zfold6.webp"
+      "/products/product_images/Samsung_Galaxy_Z_Fold_6.webp"
     ]
   },
   {
@@ -102,7 +100,7 @@
     "avg_rating": 4.5,
     "review_count": 54,
     "image_urls": [
-      "/products/rogphone9.webp"
+      "/products/product_images/ASUS_ROG_Phone_9.webp"
     ]
   },
   {
@@ -128,9 +126,7 @@
     "avg_rating": 4.2,
     "review_count": 41,
     "image_urls": [
-      "/products/product_images/Sony_Xperia_1_VI.jpg",
-      "/products/product_images/Sony_Xperia_1_VI(1).jpg",
-      "/products/product_images/Sony_Xperia_1_VI(2).jpg"
+      "/products/product_images/Sony_Xperia_1_VI.jpg"
     ]
   },
   {
@@ -143,7 +139,7 @@
     "avg_rating": 4.9,
     "review_count": 203,
     "image_urls": [
-      "/products/macbookpro16.webp"
+      "/products/product_images/MacBook_Pro_16_M4_Max.webp"
     ]
   },
   {
@@ -156,7 +152,7 @@
     "avg_rating": 4.8,
     "review_count": 167,
     "image_urls": [
-      "/products/macbookair15.webp"
+      "/products/product_images/MacBook_Air_15_M4.webp"
     ]
   },
   {
@@ -169,7 +165,7 @@
     "avg_rating": 4.5,
     "review_count": 92,
     "image_urls": [
-      "/products/dellxps16.webp"
+      "/products/product_images/Dell_XPS_16_(2025).webp"
     ]
   },
   {
@@ -182,7 +178,7 @@
     "avg_rating": 4.6,
     "review_count": 78,
     "image_urls": [
-      "/products/thinkpadx1.webp"
+      "/products/product_images/Lenovo_ThinkPad_X1_Carbon_Gen_12.webp"
     ]
   },
   {
@@ -195,9 +191,7 @@
     "avg_rating": 4.7,
     "review_count": 113,
     "image_urls": [
-      "/products/product_images/ASUS_ROG_Zephyrus_G16.jpg",
-      "/products/product_images/ASUS_ROG_Zephyrus_G16(1).jpg",
-      "/products/product_images/ASUS_ROG_Zephyrus_G16(2).jpg"
+      "/products/product_images/ASUS_ROG_Zephyrus_G16.jpg"
     ]
   },
   {
@@ -210,7 +204,7 @@
     "avg_rating": 4.4,
     "review_count": 65,
     "image_urls": [
-      "/products/spectrex360.webp"
+      "/products/product_images/HP_Spectre_x360_16.webp"
     ]
   },
   {
@@ -223,7 +217,7 @@
     "avg_rating": 4.5,
     "review_count": 87,
     "image_urls": [
-      "/products/razerblade16.webp"
+      "/products/product_images/Razer_Blade_16_(2025).webp"
     ]
   },
   {
@@ -236,7 +230,7 @@
     "avg_rating": 4.4,
     "review_count": 56,
     "image_urls": [
-      "/products/msistealth18.webp"
+      "/products/product_images/MSI_Stealth_18_AI_Studio.webp"
     ]
   },
   {
@@ -249,7 +243,7 @@
     "avg_rating": 4.2,
     "review_count": 134,
     "image_urls": [
-      "/products/acerswiftgo14.webp"
+      "/products/product_images/Acer_Swift_Go_14.webp"
     ]
   },
   {
@@ -262,7 +256,7 @@
     "avg_rating": 4.3,
     "review_count": 48,
     "image_urls": [
-      "/products/galaxybook4ultra.webp"
+      "/products/product_images/Samsung_Galaxy_Book4_Ultra.webp"
     ]
   },
   {
@@ -275,9 +269,7 @@
     "avg_rating": 4.8,
     "review_count": 245,
     "image_urls": [
-      "/products/product_images/Sony_WH-1000XM6.jpg",
-      "/products/product_images/Sony_WH-1000XM6(1).jpg",
-      "/products/product_images/Sony_WH-1000XM6(2).jpg"
+      "/products/product_images/Sony_WH-1000XM6.jpg"
     ]
   },
   {
@@ -290,9 +282,7 @@
     "avg_rating": 4.6,
     "review_count": 178,
     "image_urls": [
-      "/products/product_images/Apple_AirPods_Max_(2025).jpg",
-      "/products/product_images/Apple_AirPods_Max_(2025)(1).jpg",
-      "/products/product_images/Apple_AirPods_Max_(2025)(2).jpg"
+      "/products/product_images/Apple_AirPods_Max_(2025).jpg"
     ]
   },
   {
@@ -305,7 +295,7 @@
     "avg_rating": 4.7,
     "review_count": 198,
     "image_urls": [
-      "/products/boseqcultra.webp"
+      "/products/product_images/Bose_QuietComfort_Ultra.webp"
     ]
   },
   {
@@ -318,7 +308,7 @@
     "avg_rating": 4.5,
     "review_count": 89,
     "image_urls": [
-      "/products/momentum5.webp"
+      "/products/product_images/Sennheiser_Momentum_5.webp"
     ]
   },
   {
@@ -331,7 +321,7 @@
     "avg_rating": 4.7,
     "review_count": 312,
     "image_urls": [
-      "/products/airpodspro3.webp"
+      "/products/product_images/Apple_AirPods_Pro_3.webp"
     ]
   },
   {
@@ -344,7 +334,7 @@
     "avg_rating": 4.4,
     "review_count": 145,
     "image_urls": [
-      "/products/galaxybuds3pro.webp"
+      "/products/product_images/Samsung_Galaxy_Buds3_Pro.webp"
     ]
   },
   {
@@ -357,9 +347,7 @@
     "avg_rating": 4.8,
     "review_count": 67,
     "image_urls": [
-      "/products/product_images/Beyerdynamic_DT_900_Pro_X.jpg",
-      "/products/product_images/Beyerdynamic_DT_900_Pro_X(1).jpg",
-      "/products/product_images/Beyerdynamic_DT_900_Pro_X(2).jpg"
+      "/products/product_images/Beyerdynamic_DT_900_Pro_X.jpg"
     ]
   },
   {
@@ -372,7 +360,7 @@
     "avg_rating": 4.3,
     "review_count": 102,
     "image_urls": [
-      "/products/jbltourone.webp"
+      "/products/product_images/JBL_Tour_One_M3.webp"
     ]
   },
   {
@@ -385,7 +373,7 @@
     "avg_rating": 4.5,
     "review_count": 134,
     "image_urls": [
-      "/products/athm50xbt2.webp"
+      "/products/product_images/Audio-Technica_ATH-M50xBT2.webp"
     ]
   },
   {
@@ -398,9 +386,7 @@
     "avg_rating": 4.2,
     "review_count": 87,
     "image_urls": [
-      "/products/product_images/Nothing_ear_(3).jpg",
-      "/products/product_images/Nothing_ear_(3)(1).jpg",
-      "/products/product_images/Nothing_ear_(3)(2).jpg"
+      "/products/product_images/Nothing_ear_(3).jpg"
     ]
   },
   {
@@ -413,7 +399,7 @@
     "avg_rating": 4.8,
     "review_count": 156,
     "image_urls": [
-      "/products/applewatchultra3.webp"
+      "/products/product_images/Apple_Watch_Ultra_3.webp"
     ]
   },
   {
@@ -426,7 +412,7 @@
     "avg_rating": 4.6,
     "review_count": 98,
     "image_urls": [
-      "/products/galaxywatch7ultra.webp"
+      "/products/product_images/Samsung_Galaxy_Watch_7_Ultra.webp"
     ]
   },
   {
@@ -439,7 +425,7 @@
     "avg_rating": 4.7,
     "review_count": 187,
     "image_urls": [
-      "/products/applewatchs10.webp"
+      "/products/product_images/Apple_Watch_Series_10.webp"
     ]
   },
   {
@@ -452,9 +438,7 @@
     "avg_rating": 4.8,
     "review_count": 134,
     "image_urls": [
-      "/products/product_images/Garmin_Fenix_8.jpg",
-      "/products/product_images/Garmin_Fenix_8(1).jpg",
-      "/products/product_images/Garmin_Fenix_8(2).jpg"
+      "/products/product_images/Garmin_Fenix_8.jpg"
     ]
   },
   {
@@ -467,7 +451,7 @@
     "avg_rating": 4.4,
     "review_count": 76,
     "image_urls": [
-      "/products/pixelwatch3.webp"
+      "/products/product_images/Google_Pixel_Watch_3.webp"
     ]
   },
   {
@@ -480,7 +464,7 @@
     "avg_rating": 4.5,
     "review_count": 89,
     "image_urls": [
-      "/products/garminvenu4.webp"
+      "/products/product_images/Garmin_Venu_4.webp"
     ]
   },
   {
@@ -493,7 +477,7 @@
     "avg_rating": 4.3,
     "review_count": 45,
     "image_urls": [
-      "/products/scanwatchnova.webp"
+      "/products/product_images/Withings_ScanWatch_Nova.webp"
     ]
   },
   {
@@ -519,9 +503,7 @@
     "avg_rating": 4.3,
     "review_count": 67,
     "image_urls": [
-      "/products/product_images/Huawei_Watch_GT_5_Pro.jpg",
-      "/products/product_images/Huawei_Watch_GT_5_Pro(1).jpg",
-      "/products/product_images/Huawei_Watch_GT_5_Pro(2).jpg"
+      "/products/product_images/Huawei_Watch_GT_5_Pro.jpg"
     ]
   },
   {
@@ -547,7 +529,7 @@
     "avg_rating": 4.9,
     "review_count": 134,
     "image_urls": [
-      "/products/sonya7rv.webp"
+      "/products/product_images/Sony_Alpha_A7R_V.webp"
     ]
   },
   {
@@ -560,7 +542,7 @@
     "avg_rating": 4.8,
     "review_count": 98,
     "image_urls": [
-      "/products/canonr5ii.webp"
+      "/products/product_images/Canon_EOS_R5_Mark_II.webp"
     ]
   },
   {
@@ -573,9 +555,7 @@
     "avg_rating": 4.7,
     "review_count": 87,
     "image_urls": [
-      "/products/product_images/Fujifilm_X-T50.jpg",
-      "/products/product_images/Fujifilm_X-T50(1).jpg",
-      "/products/product_images/Fujifilm_X-T50(2).jpg"
+      "/products/product_images/fujifilm_xt50.webp"
     ]
   },
   {
@@ -601,8 +581,7 @@
     "avg_rating": 4.5,
     "review_count": 167,
     "image_urls": [
-      "/products/product_images/DJI_Osmo_Action_5_Pro.jpg",
-      "/products/product_images/DJI_Osmo_Action_5_Pro(1).jpg"
+      "/products/product_images/dji_osmo_action5_pro.webp"
     ]
   },
   {
@@ -615,7 +594,7 @@
     "avg_rating": 4.4,
     "review_count": 198,
     "image_urls": [
-      "/products/goprohero13.webp"
+      "/products/product_images/GoPro_HERO13_Black.webp"
     ]
   },
   {
@@ -641,7 +620,7 @@
     "avg_rating": 4.3,
     "review_count": 78,
     "image_urls": [
-      "/products/insta360x4.webp"
+      "/products/product_images/Insta360_X4.webp"
     ]
   },
   {
@@ -654,9 +633,7 @@
     "avg_rating": 4.5,
     "review_count": 112,
     "image_urls": [
-      "/products/product_images/Sony_ZV-E10_II.jpg",
-      "/products/product_images/Sony_ZV-E10_II(1).jpg",
-      "/products/product_images/Sony_ZV-E10_II(2).jpg"
+      "/products/product_images/Sony_ZV-E10_II.jpg"
     ]
   },
   {
@@ -669,9 +646,7 @@
     "avg_rating": 4.1,
     "review_count": 56,
     "image_urls": [
-      "/products/product_images/Canon_PowerShot_V10.jpg",
-      "/products/product_images/Canon_PowerShot_V10(1).jpg",
-      "/products/product_images/Canon_PowerShot_V10(2).jpg"
+      "/products/product_images/Canon_PowerShot_V10.jpg"
     ]
   },
   {
@@ -684,9 +659,7 @@
     "avg_rating": 4.8,
     "review_count": 156,
     "image_urls": [
-      "/products/product_images/Apple_iPad_Pro_M4_13-inch.jpg",
-      "/products/product_images/Apple_iPad_Pro_M4_13-inch(1).jpg",
-      "/products/product_images/Apple_iPad_Pro_M4_13-inch(2).jpg"
+      "/products/product_images/Apple_iPad_Pro_M4_13-inch.jpg"
     ]
   },
   {
@@ -699,9 +672,7 @@
     "avg_rating": 4.6,
     "review_count": 198,
     "image_urls": [
-      "/products/product_images/Anker_Prime_27,650mAh_Power_Bank.jpg",
-      "/products/product_images/Anker_Prime_27,650mAh_Power_Bank(1).jpg",
-      "/products/product_images/Anker_Prime_27,650mAh_Power_Bank(2).jpg"
+      "/products/product_images/Anker_Prime_27,650mAh_Power_Bank.jpg"
     ]
   },
   {
@@ -714,7 +685,7 @@
     "avg_rating": 4.7,
     "review_count": 234,
     "image_urls": [
-      "/products/mxmaster4.webp"
+      "/products/product_images/Logitech_MX_Master_4.webp"
     ]
   },
   {
@@ -727,7 +698,7 @@
     "avg_rating": 4.6,
     "review_count": 145,
     "image_urls": [
-      "/products/samsungt9ssd.webp"
+      "/products/product_images/Samsung_T9_Portable_SSD_2TB.webp"
     ]
   },
   {
@@ -740,7 +711,7 @@
     "avg_rating": 4.5,
     "review_count": 87,
     "image_urls": [
-      "/products/huntsmanv3pro.webp"
+      "/products/product_images/Razer_Huntsman_V3_Pro.webp"
     ]
   },
   {
@@ -779,7 +750,7 @@
     "avg_rating": 4.5,
     "review_count": 178,
     "image_urls": [
-      "/products/belkin3in1.webp"
+      "/products/product_images/Belkin_MagSafe_3-in-1_Charger.webp"
     ]
   },
   {
@@ -792,7 +763,7 @@
     "avg_rating": 4.8,
     "review_count": 98,
     "image_urls": [
-      "/products/lgultragear32.webp"
+      "/products/product_images/LG_UltraGear_32_4K_OLED_Monitor.webp"
     ]
   },
   {
@@ -805,7 +776,7 @@
     "avg_rating": 4.6,
     "review_count": 89,
     "image_urls": [
-      "/products/streamdeckplus.webp"
+      "/products/product_images/Elgato_Stream_Deck_+.webp"
     ]
   }
 ]

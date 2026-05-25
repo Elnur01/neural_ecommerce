@@ -69,7 +69,7 @@ export default function HomePage() {
             {[
               { value: "60+", label: "Products" },
               { value: "6", label: "Categories" },
-              { value: "12K ₺", label: "Credit Wallet" },
+              { value: "Up to 46K ₺", label: "Credit Wallet" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold" style={{ color: "var(--primary)" }}>
@@ -121,7 +121,7 @@ export default function HomePage() {
             How It Works
           </h2>
           <p className="text-center mb-12" style={{ color: "var(--text-secondary)" }}>
-            Simple 3-step process with your 12,000 ₺ simulated credit wallet
+            Simple 3-step process with your simulated credit wallet (up to 46,000 ₺)
           </p>
           <div className="grid sm:grid-cols-3 gap-8">
             {[

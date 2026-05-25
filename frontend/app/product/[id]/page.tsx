@@ -180,9 +180,9 @@ export default function ProductDetailPage() {
           {/* Add to cart */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex items-center border rounded-xl overflow-hidden" style={{ borderColor: "var(--border)" }}>
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-4 py-3 text-lg font-medium hover:bg-gray-50" style={{ color: "var(--text-secondary)" }}>−</button>
+              <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer" style={{ color: "var(--text-secondary)" }}>−</button>
               <span className="px-4 py-3 font-semibold min-w-[48px] text-center" style={{ color: "var(--text-primary)" }}>{qty}</span>
-              <button onClick={() => setQty(qty + 1)} className="px-4 py-3 text-lg font-medium hover:bg-gray-50" style={{ color: "var(--text-secondary)" }}>+</button>
+              <button onClick={() => setQty(qty + 1)} className="px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer" style={{ color: "var(--text-secondary)" }}>+</button>
             </div>
             <button onClick={handleAddToCart} disabled={adding} className="btn btn-accent btn-lg flex-1">
               {adding ? "Adding..." : added ? "✓ Added to Cart" : "Add to Cart"}

@@ -61,23 +61,23 @@ export default function ScenarioPage() {
           <h1 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
             {lang === "tr" ? "Göreviniz" : "Your Shopping Task"}
           </h1>
-          <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
+          <div className="flex gap-2 bg-gray-100 dark:bg-zinc-800 p-1 rounded-lg">
             <button
               onClick={() => setLang("en")}
-              className={`px-3 py-1 text-sm rounded-md transition-colors ${lang === "en" ? "bg-white shadow" : "text-gray-500 hover:text-gray-900"}`}
+              className={`px-3 py-1 text-sm rounded-md transition-colors cursor-pointer ${lang === "en" ? "bg-white dark:bg-zinc-700 shadow text-gray-900 dark:text-zinc-100 font-medium" : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100"}`}
             >
               EN
             </button>
             <button
               onClick={() => setLang("tr")}
-              className={`px-3 py-1 text-sm rounded-md transition-colors ${lang === "tr" ? "bg-white shadow" : "text-gray-500 hover:text-gray-900"}`}
+              className={`px-3 py-1 text-sm rounded-md transition-colors cursor-pointer ${lang === "tr" ? "bg-white dark:bg-zinc-700 shadow text-gray-900 dark:text-zinc-100 font-medium" : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100"}`}
             >
               TR
             </button>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border mb-8" style={{ borderColor: "var(--border)" }}>
+        <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border mb-8" style={{ borderColor: "var(--border)" }}>
           <p className="text-lg leading-relaxed whitespace-pre-wrap" style={{ color: "var(--text-primary)" }}>
             {user.scenario_text_shown}
           </p>
