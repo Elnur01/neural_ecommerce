@@ -32,6 +32,7 @@ out/
 # ── Research exports ──────────────────────────────────────────────────
 research/exports/*.csv
 research/exports/*.parquet
+backend/exports/
 
 # ── Testing artifacts ─────────────────────────────────────────────────
 frontend/playwright-report/
