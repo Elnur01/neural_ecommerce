@@ -50,7 +50,7 @@ export default function ScenarioBanner() {
 
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl shadow-xl max-w-lg w-full p-6 animate-slide-up relative">
+          <div className="bg-surface border border-border rounded-xl shadow-xl max-w-lg w-full p-6 animate-slide-up relative">
             <h3 className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
               {lang === "tr" ? "Alışveriş Göreviniz" : "Your Shopping Task"}
             </h3>

@@ -60,10 +60,10 @@ export default function DebriefPage() {
       <div className="min-h-screen flex flex-col items-center justify-center p-4" style={{ background: "var(--gradient-subtle)" }}>
         <div className="card p-8 max-w-md text-center animate-slide-up">
           <div className="text-4xl mb-4">🎉</div>
-          <h1 className="text-2xl font-bold mb-2 text-indigo-900">
+          <h1 className="text-2xl font-bold mb-2" style={{ color: "var(--primary)" }}>
             {lang === "tr" ? "Teşekkürler!" : "Thank You!"}
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
             {lang === "tr" 
               ? "Araştırma çalışmamızı tamamladınız. Verileriniz başarıyla kaydedildi."
               : "You have completed the research study. Your data has been recorded successfully."}
@@ -79,14 +79,14 @@ export default function DebriefPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 py-12" style={{ background: "var(--gradient-subtle)" }}>
       <div className="w-full max-w-2xl card p-8 animate-slide-up">
-        <h1 className="text-2xl font-bold mb-6 text-indigo-900">
+        <h1 className="text-2xl font-bold mb-6" style={{ color: "var(--primary)" }}>
           {lang === "tr" ? "Çalışma Sonu Anketi" : "Post-Session Survey"}
         </h1>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Question 1 */}
           <div>
-            <label className="block font-medium mb-2 text-gray-800">
+            <label className="block font-medium mb-2" style={{ color: "var(--text-primary)" }}>
               {lang === "tr" ? "Bu oturumda bir ürün satın aldınız mı?" : "Did you purchase an item in this session?"}
             </label>
             <div className="flex gap-4">
@@ -104,7 +104,7 @@ export default function DebriefPage() {
           {/* Conditional Question 2 (Purchased) */}
           {form.completed_purchase === true && (
             <div className="animate-fade-in">
-              <label className="block font-medium mb-2 text-gray-800">
+              <label className="block font-medium mb-2" style={{ color: "var(--text-primary)" }}>
                 {lang === "tr" ? "Size verilen alışveriş görevini ne ölçüde tamamladığınızı düşünüyorsunuz?" : "To what extent do you feel you completed your assigned shopping task?"}
               </label>
               <select className="input w-full" value={form.mission_completed_self_report} onChange={(e) => setForm({...form, mission_completed_self_report: e.target.value})} required>
@@ -120,7 +120,7 @@ export default function DebriefPage() {
           {/* Conditional Question 2 (Not Purchased) */}
           {form.completed_purchase === false && (
             <div className="animate-fade-in">
-              <label className="block font-medium mb-2 text-gray-800">
+              <label className="block font-medium mb-2" style={{ color: "var(--text-primary)" }}>
                 {lang === "tr" ? "Neden alışverişi tamamlamadan ayrıldınız?" : "Why did you leave without completing a purchase?"}
               </label>
               <select className="input w-full" value={form.abandonment_reason} onChange={(e) => setForm({...form, abandonment_reason: e.target.value})} required>
@@ -138,7 +138,7 @@ export default function DebriefPage() {
 
           {/* Question 3 */}
           <div>
-            <label className="block font-medium mb-2 text-gray-800">
+            <label className="block font-medium mb-2" style={{ color: "var(--text-primary)" }}>
               {lang === "tr" ? "Lütfen oturumun başında size verilen alışveriş görevini kısaca kendi cümlelerinizle yazın:" : "Please briefly write out the shopping task you were assigned at the start of the session in your own words:"}
             </label>
             <textarea className="input w-full h-24" value={form.mission_recall_text} onChange={(e) => setForm({...form, mission_recall_text: e.target.value})} required></textarea>
@@ -147,7 +147,7 @@ export default function DebriefPage() {
           {/* Question 4 & 5 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-medium mb-2 text-gray-800 text-sm">
+              <label className="block font-medium mb-2 text-sm" style={{ color: "var(--text-primary)" }}>
                 {lang === "tr" ? "Size verilen senaryonun gerçekçiliği (1-5)" : "Realism of the assigned scenario (1-5)"}
               </label>
               <div className="flex justify-between max-w-[200px]">
@@ -160,7 +160,7 @@ export default function DebriefPage() {
               </div>
             </div>
             <div>
-              <label className="block font-medium mb-2 text-gray-800 text-sm">
+              <label className="block font-medium mb-2 text-sm" style={{ color: "var(--text-primary)" }}>
                 {lang === "tr" ? "Alışveriş platformunun genel gerçekçiliği (1-5)" : "Overall realism of the shopping platform (1-5)"}
               </label>
               <div className="flex justify-between max-w-[200px]">
@@ -176,7 +176,7 @@ export default function DebriefPage() {
 
           {/* Question 6 */}
           <div>
-            <label className="block font-medium mb-2 text-gray-800">
+            <label className="block font-medium mb-2" style={{ color: "var(--text-primary)" }}>
               {lang === "tr" ? "Eklemek istediğiniz başka bir şey var mı? (İsteğe bağlı)" : "Anything else you'd like to add? (Optional)"}
             </label>
             <textarea className="input w-full h-16" value={form.free_text} onChange={(e) => setForm({...form, free_text: e.target.value})}></textarea>

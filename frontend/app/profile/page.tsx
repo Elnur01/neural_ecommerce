@@ -84,7 +84,7 @@ export default function ProfilePage() {
         <p className="text-sm mb-4 text-indigo-800 dark:text-indigo-300">
           You were assigned the <strong>"{user.scenario_label}"</strong> scenario. Your assigned budget reflects the spending capacity of a {user.age_group} year-old {user.loyalty_tier}-tier shopper.
         </p>
-        <div className="bg-white dark:bg-zinc-900 p-4 rounded-lg border border-indigo-100 dark:border-zinc-800">
+        <div className="bg-surface p-4 rounded-lg border border-border">
           <p className="text-sm text-gray-700 dark:text-zinc-300 whitespace-pre-wrap">{user.scenario_text_shown}</p>
         </div>
       </div>

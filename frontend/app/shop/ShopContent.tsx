@@ -80,16 +80,16 @@ export default function ShopContent() {
             </button>
           ))}
         </div>
-        <div className="flex gap-3">
-          <form onSubmit={handleSearch} className="relative">
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." className="input pr-10" style={{ width: "220px" }} />
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <form onSubmit={handleSearch} className="relative w-full sm:w-auto">
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." className="input pr-10 w-full sm:w-[220px]" />
             <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ color: "var(--text-muted)" }}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
             </button>
           </form>
-          <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); setPage(1); }} className="input" style={{ width: "180px" }}>
+          <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); setPage(1); }} className="input w-full sm:w-[180px]">
             {SORT_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
           </select>
         </div>

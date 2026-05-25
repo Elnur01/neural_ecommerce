@@ -71,77 +71,84 @@ export default function CartPage() {
           {cart.items.map((item) => {
             const effectivePrice = (item.product_price || 0) * (1 - (item.product_discount_rate || 0));
             return (
-              <div key={item.id} className="card p-4 flex gap-4 items-center">
-                <div className="w-20 h-20 rounded-xl flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "var(--surface-raised)", border: "1px solid var(--border)" }}>
-                  {item.product_image_url ? (
-                    <img src={item.product_image_url} alt={item.product_name || ""} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-3xl">🛍️</span>
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm truncate" style={{ color: "var(--text-primary)" }}>{item.product_name}</h3>
-                  <p className="text-sm mt-1" style={{ color: "var(--primary)" }}>
-                    {effectivePrice.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
-                    {item.product_discount_rate! > 0 && (
-                      <span className="line-through ml-2" style={{ color: "var(--text-muted)" }}>
-                        {item.product_price?.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
-                      </span>
+              <div key={item.id} className="card p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                {/* Product Info Group */}
+                <div className="flex gap-4 items-center w-full sm:w-auto">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "var(--surface-raised)", border: "1px solid var(--border)" }}>
+                    {item.product_image_url ? (
+                      <img src={item.product_image_url} alt={item.product_name || ""} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-2xl sm:text-3xl">🛍️</span>
                     )}
-                  </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-sm truncate" style={{ color: "var(--text-primary)" }}>{item.product_name}</h3>
+                    <p className="text-sm mt-1" style={{ color: "var(--primary)" }}>
+                      {effectivePrice.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
+                      {item.product_discount_rate! > 0 && (
+                        <span className="line-through ml-2" style={{ color: "var(--text-muted)" }}>
+                          {item.product_price?.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
-                {/* Quantity controls */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => {
-                      if (item.quantity > 1) {
-                        updateQuantity(item.id, item.quantity - 1);
-                      } else {
-                        if (cart) {
-                          tracker.recordRemoveFromCart(
-                            item,
-                            cart.subtotal - (item.product_price || 0) * item.quantity,
-                            cart.items.length - 1
-                          );
+
+                {/* Actions & Price Group */}
+                <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0">
+                  {/* Quantity controls */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        if (item.quantity > 1) {
+                          updateQuantity(item.id, item.quantity - 1);
+                        } else {
+                          if (cart) {
+                            tracker.recordRemoveFromCart(
+                              item,
+                              cart.subtotal - (item.product_price || 0) * item.quantity,
+                              cart.items.length - 1
+                            );
+                          }
+                          removeItem(item.id);
                         }
-                        removeItem(item.id);
-                      }
-                    }}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium"
-                    style={{ background: "var(--surface-raised)", color: "var(--text-secondary)" }}
-                  >
-                    −
-                  </button>
-                  <span className="w-8 text-center font-medium text-sm" style={{ color: "var(--text-primary)" }}>{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium"
-                    style={{ background: "var(--surface-raised)", color: "var(--text-secondary)" }}
-                  >
-                    +
+                      }}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium hover:bg-border-light cursor-pointer"
+                      style={{ background: "var(--surface-raised)", color: "var(--text-secondary)" }}
+                    >
+                      −
+                    </button>
+                    <span className="w-8 text-center font-medium text-sm" style={{ color: "var(--text-primary)" }}>{item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium hover:bg-border-light cursor-pointer"
+                      style={{ background: "var(--surface-raised)", color: "var(--text-secondary)" }}
+                    >
+                      +
+                    </button>
+                  </div>
+                  {/* Line total */}
+                  <div className="text-right min-w-[80px] sm:min-w-0 sm:px-2">
+                    <span className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>
+                      {(effectivePrice * item.quantity).toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
+                    </span>
+                  </div>
+                  {/* Remove */}
+                  <button onClick={() => {
+                    if (cart) {
+                      tracker.recordRemoveFromCart(
+                        item,
+                        cart.subtotal - (item.product_price || 0) * item.quantity,
+                        cart.items.length - 1
+                      );
+                    }
+                    removeItem(item.id);
+                  }} className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer" title="Remove">
+                    <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                   </button>
                 </div>
-                {/* Line total */}
-                <div className="text-right min-w-[80px]">
-                  <span className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>
-                    {(effectivePrice * item.quantity).toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺
-                  </span>
-                </div>
-                {/* Remove */}
-                <button onClick={() => {
-                  if (cart) {
-                    tracker.recordRemoveFromCart(
-                      item,
-                      cart.subtotal - (item.product_price || 0) * item.quantity,
-                      cart.items.length - 1
-                    );
-                  }
-                  removeItem(item.id);
-                }} className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer" title="Remove">
-                  <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
               </div>
             );
           })}
