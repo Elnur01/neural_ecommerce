@@ -38,6 +38,9 @@ class Settings:
         extras = ["http://localhost:3000", "http://localhost:3001"]
         return list(dict.fromkeys(base + extras))  # deduplicated, order preserved
 
+    # ── Admin ────────────────────────────────────────────────────────
+    ADMIN_PIN: str = os.getenv("ADMIN_PIN", "research2026")
+
     # ── General ───────────────────────────────────────────────────────
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
     SENTRY_DSN: str = os.getenv("SENTRY_DSN", "")

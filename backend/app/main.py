@@ -24,7 +24,7 @@ if settings.SENTRY_DSN:
         profiles_sample_rate=1.0,
     )
 
-from app.routers import auth, products, cart, orders, events, reviews, coupons, scenario, surveys
+from app.routers import auth, products, cart, orders, events, reviews, coupons, scenario, surveys, admin
 
 # ── App instance ──────────────────────────────────────────────────────
 app = FastAPI(
@@ -52,6 +52,7 @@ app.include_router(reviews.router, prefix="/reviews", tags=["Reviews"])
 app.include_router(coupons.router, prefix="/coupons", tags=["Coupons"])
 app.include_router(scenario.router, prefix="/scenario", tags=["Scenario"])
 app.include_router(surveys.router, prefix="/surveys", tags=["Surveys"])
+app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 
 
 # ── Health check ──────────────────────────────────────────────────────
