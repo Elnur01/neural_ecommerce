@@ -227,7 +227,6 @@ export default function SurveysPage() {
                   {surveys.map((s) => (
                     <Fragment key={s.survey_id}>
                       <tr
-                        key={s.survey_id}
                         onClick={() => setExpandedId(expandedId === s.survey_id ? null : s.survey_id)}
                         style={{ cursor: "pointer" }}
                       >

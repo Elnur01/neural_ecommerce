@@ -143,7 +143,6 @@ export default function OrdersPage() {
                   {orders.map((o) => (
                     <Fragment key={o.order_id}>
                       <tr
-                        key={o.order_id}
                         onClick={() => setExpandedId(expandedId === o.order_id ? null : o.order_id)}
                         style={{ cursor: "pointer" }}
                       >

@@ -197,7 +197,6 @@ export default function ParticipantsPage() {
                   {participants.map((p) => (
                     <Fragment key={p.customer_id}>
                       <tr
-                        key={p.customer_id}
                         onClick={() => { void fetchDetail(p.customer_id); }}
                         style={{ cursor: "pointer" }}
                       >
