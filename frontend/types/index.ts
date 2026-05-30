@@ -92,6 +92,7 @@ export interface Cart {
   items: CartItem[];
   subtotal: number;
   shipping_fee: number;
+  tax?: number;
   total: number;
 }
 
@@ -108,6 +109,7 @@ export interface Order {
   order_id: string;
   total: number;
   shipping_fee: number;
+  tax?: number;
   coupon_code: string | null;
   discount_amount: number;
   created_at: string | null;

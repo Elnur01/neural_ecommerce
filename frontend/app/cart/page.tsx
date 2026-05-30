@@ -48,7 +48,8 @@ export default function CartPage() {
 
   const discountAmount = couponResult?.valid && couponResult.discount_pct && cart
     ? cart.subtotal * couponResult.discount_pct : 0;
-  const finalTotal = cart ? cart.subtotal + cart.shipping_fee - discountAmount : 0;
+  const taxAmount = cart?.tax ?? (cart ? cart.subtotal * 0.20 : 0);
+  const finalTotal = cart ? cart.subtotal + taxAmount + cart.shipping_fee - discountAmount : 0;
 
   if (!cart || cart.items.length === 0) {
     return (
@@ -191,6 +192,10 @@ export default function CartPage() {
                 <span style={{ color: "var(--text-primary)" }}>{cart.subtotal.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
               </div>
               <div className="flex justify-between">
+                <span style={{ color: "var(--text-secondary)" }}>Tax (20%)</span>
+                <span style={{ color: "var(--text-primary)" }}>{taxAmount.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
+              </div>
+              <div className="flex justify-between">
                 <span style={{ color: "var(--text-secondary)" }}>Shipping</span>
                 <span style={{ color: cart.shipping_fee === 0 ? "var(--success)" : "var(--text-primary)" }}>
                   {cart.shipping_fee === 0 ? "Free" : `${cart.shipping_fee} ₺`}
@@ -228,7 +233,7 @@ export default function CartPage() {
             </Link>
 
             <p className="text-xs text-center mt-3" style={{ color: "var(--text-muted)" }}>
-              {cart.subtotal < 1500 ? `Add ${(1500 - cart.subtotal).toLocaleString("tr-TR")} ₺ more for free shipping` : "✓ Free shipping applied"}
+              ✓ Shipping fee and 20% tax applied
             </p>
           </div>
         </div>

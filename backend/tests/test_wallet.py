@@ -47,21 +47,27 @@ def setup_coupon(db_session, code, discount_pct):
 
 def test_checkout_deducts_correct_amount(auth_client, db_session, test_user):
     # Setup
-    setup_cart_and_product(db_session, test_user, 1000.00, 1) # Total 1000 + 50 shipping = 1050
+    setup_cart_and_product(db_session, test_user, 1000.00, 1)
     initial_balance = test_user.credit_balance
 
     # Execute checkout
     response = auth_client.post("/orders", json={})
     
     assert response.status_code == 201
+    data = response.json()
     db_session.refresh(test_user)
     
-    # 1000 + 50 shipping = 1050
-    assert test_user.credit_balance == initial_balance - Decimal("1050.00")
+    shipping = data["shipping_fee"]
+    tax = data["tax"]
+    assert shipping in [40.0, 50.0, 60.0, 80.0, 100.0]
+    assert tax == 200.00  # 20% of 1000
+    expected_total = 1000.00 + tax + shipping
+    assert data["total"] == expected_total
+    assert test_user.credit_balance == initial_balance - Decimal(str(expected_total))
 
 def test_checkout_fails_when_balance_insufficient(auth_client, db_session, test_user):
     # Setup: user has 10000 balance. Product costs 11000.
-    setup_cart_and_product(db_session, test_user, 11000.00, 1) # Total 11000 + 0 shipping = 11000
+    setup_cart_and_product(db_session, test_user, 11000.00, 1)
 
     # Execute checkout
     response = auth_client.post("/orders", json={})
@@ -71,7 +77,7 @@ def test_checkout_fails_when_balance_insufficient(auth_client, db_session, test_
 
 def test_checkout_with_coupon_applies_discount(auth_client, db_session, test_user):
     # Setup
-    setup_cart_and_product(db_session, test_user, 2000.00, 1) # Total 2000 + 0 shipping = 2000
+    setup_cart_and_product(db_session, test_user, 2000.00, 1)
     setup_coupon(db_session, "SAVE20", 0.20)
     initial_balance = test_user.credit_balance
 
@@ -79,11 +85,18 @@ def test_checkout_with_coupon_applies_discount(auth_client, db_session, test_use
     response = auth_client.post("/orders", json={"coupon_code": "SAVE20"})
     
     assert response.status_code == 201
+    data = response.json()
     db_session.refresh(test_user)
     
-    # Subtotal 2000. Discount 20% = 400. Shipping 0. Total = 1600.
-    assert response.json()["total"] == 1600.00
-    assert test_user.credit_balance == initial_balance - Decimal("1600.00")
+    shipping = data["shipping_fee"]
+    tax = data["tax"]
+    discount = data["discount_amount"]
+    assert shipping in [40.0, 50.0, 60.0, 80.0, 100.0]
+    assert tax == 400.00  # 20% of 2000
+    assert discount == 400.00  # 20% of 2000
+    expected_total = 2000.00 + tax + shipping - discount
+    assert data["total"] == expected_total
+    assert test_user.credit_balance == initial_balance - Decimal(str(expected_total))
 
 def test_balance_never_goes_negative(auth_client, db_session, test_user):
     # Setup: item exactly equal to balance + 1

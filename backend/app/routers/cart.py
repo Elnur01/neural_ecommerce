@@ -3,6 +3,7 @@ Cart router — CRUD operations for the user's shopping cart.
 """
 
 import uuid
+from decimal import Decimal
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session as DBSession
@@ -11,6 +12,7 @@ from app.database import get_db
 from app.models.models import Cart, CartItem, Product, User
 from app.schemas.schemas import CartItemCreate, CartItemUpdate, CartItemOut, CartOut
 from app.routers.auth import get_current_user
+from app.services.checkout import get_stable_shipping_fee, calculate_tax
 
 router = APIRouter()
 
@@ -18,11 +20,11 @@ router = APIRouter()
 def _build_cart_response(cart: Cart, db: DBSession) -> CartOut:
     """Build a full cart response with computed totals."""
     items_out = []
-    subtotal = 0.0
+    subtotal = Decimal("0")
 
     for item in cart.items:
         product = db.query(Product).filter(Product.product_id == item.product_id).first()
-        effective_price = float(product.price) * (1 - product.discount_rate) if product else 0
+        effective_price = Decimal(str(product.price)) * Decimal(str(1 - product.discount_rate)) if product else Decimal("0")
         line_total = effective_price * item.quantity
         subtotal += line_total
 
@@ -38,15 +40,17 @@ def _build_cart_response(cart: Cart, db: DBSession) -> CartOut:
             )
         )
 
-    shipping_fee = 0.0 if subtotal >= 1500 else 50.0
-    total = subtotal + shipping_fee
+    tax = calculate_tax(subtotal)
+    shipping_fee = get_stable_shipping_fee(db, cart.customer_id)
+    total = subtotal + tax + shipping_fee
 
     return CartOut(
         cart_id=cart.cart_id,
         items=items_out,
-        subtotal=round(subtotal, 2),
-        shipping_fee=shipping_fee,
-        total=round(total, 2),
+        subtotal=round(float(subtotal), 2),
+        shipping_fee=float(shipping_fee),
+        tax=round(float(tax), 2),
+        total=round(float(total), 2),
     )
 
 

@@ -74,6 +74,10 @@ export default function CheckoutContent() {
             </div>
           )}
           <div className="flex justify-between py-2 text-sm">
+            <span style={{ color: "var(--text-secondary)" }}>Tax (20%)</span>
+            <span style={{ color: "var(--text-primary)" }}>{order.tax?.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
+          </div>
+          <div className="flex justify-between py-2 text-sm">
             <span style={{ color: "var(--text-secondary)" }}>Shipping</span>
             <span style={{ color: order.shipping_fee === 0 ? "var(--success)" : "var(--text-primary)" }}>{order.shipping_fee === 0 ? "Free" : `${order.shipping_fee} ₺`}</span>
           </div>
@@ -113,6 +117,10 @@ export default function CheckoutContent() {
           <div className="flex justify-between">
             <span style={{ color: "var(--text-secondary)" }}>Subtotal</span>
             <span>{cart?.subtotal.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
+          </div>
+          <div className="flex justify-between">
+            <span style={{ color: "var(--text-secondary)" }}>Tax (20%)</span>
+            <span>{cart?.tax?.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
           </div>
           <div className="flex justify-between">
             <span style={{ color: "var(--text-secondary)" }}>Shipping</span>

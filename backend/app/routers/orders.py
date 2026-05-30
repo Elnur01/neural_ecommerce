@@ -13,6 +13,7 @@ from app.models.models import Cart, CartItem, Order, OrderItem, Product, User, C
 from app.schemas.schemas import OrderCreate, OrderOut, OrderItemOut
 from app.routers.auth import get_current_user
 from app.services.coupons import validate_coupon, use_coupon
+from app.services.checkout import get_stable_shipping_fee, calculate_tax
 
 router = APIRouter()
 
@@ -55,7 +56,8 @@ def create_order(
             "product_image_url": product.image_urls[0] if product.image_urls else None,
         })
 
-    shipping_fee = Decimal("0") if subtotal >= 1500 else Decimal("50")
+    tax = calculate_tax(subtotal)
+    shipping_fee = get_stable_shipping_fee(db, current_user.customer_id)
 
     # ── Apply coupon if provided ──────────────────────────────────────
     discount_amount = Decimal("0")
@@ -65,7 +67,7 @@ def create_order(
             raise HTTPException(status_code=400, detail=coupon_result["message"])
         discount_amount = subtotal * Decimal(str(coupon_result["discount_pct"]))
 
-    total = subtotal + shipping_fee - discount_amount
+    total = subtotal + tax + shipping_fee - discount_amount
 
     # ── Validate balance ──────────────────────────────────────────────
     if current_user.credit_balance < total:
@@ -131,6 +133,7 @@ def create_order(
         order_id=order.order_id,
         total=float(order.total),
         shipping_fee=float(order.shipping_fee),
+        tax=float(tax),
         coupon_code=order.coupon_code,
         discount_amount=float(order.discount_amount),
         created_at=order.created_at,
@@ -154,6 +157,7 @@ def list_orders(
     result = []
     for order in orders:
         items_out = []
+        subtotal = Decimal("0")
         for oi in order.items:
             product = db.query(Product).filter(Product.product_id == oi.product_id).first()
             items_out.append(OrderItemOut(
@@ -163,10 +167,13 @@ def list_orders(
                 quantity=oi.quantity,
                 unit_price=float(oi.unit_price),
             ))
+            subtotal += oi.unit_price * oi.quantity
+        tax = calculate_tax(subtotal)
         result.append(OrderOut(
             order_id=order.order_id,
             total=float(order.total),
             shipping_fee=float(order.shipping_fee),
+            tax=float(tax),
             coupon_code=order.coupon_code,
             discount_amount=float(order.discount_amount),
             created_at=order.created_at,

@@ -141,6 +141,7 @@ class CartOut(BaseModel):
     items: list[CartItemOut] = []
     subtotal: float = 0
     shipping_fee: float = 0
+    tax: float = 0
     total: float = 0
 
     model_config = {"from_attributes": True}
@@ -167,6 +168,7 @@ class OrderOut(BaseModel):
     order_id: uuid.UUID
     total: float
     shipping_fee: float
+    tax: float = 0
     coupon_code: Optional[str] = None
     discount_amount: float = 0
     created_at: Optional[datetime] = None
