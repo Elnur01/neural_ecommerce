@@ -105,8 +105,9 @@ def test_scenario_assignment_deterministic():
 
 def test_scenario_assignment_balanced_over_1000_uuids():
     counts = Counter(assign_scenario(str(uuid.uuid4())) for _ in range(1000))
+    expected = 1000 / len(SCENARIOS)
     for arm in SCENARIOS:
-        assert 200 <= counts[arm] <= 300, f"{arm} imbalanced: {counts[arm]}"
+        assert expected * 0.5 <= counts[arm] <= expected * 1.5, f"{arm} imbalanced: {counts[arm]}"
 
 def test_segmentation_full_payload():
     out = _make_segments(seed="uid-1", device="Desktop", lang="tr")

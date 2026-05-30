@@ -2,7 +2,7 @@
   {
     "name": "iPhone 16 Pro Max",
     "category": "Phones",
-    "price": 74999.0,
+    "price": 67499.1,
     "discount_rate": 0.0,
     "description": "Apple's flagship with A18 Pro chip, 48MP camera system, titanium design, and all-day battery life.",
     "stock_simulated": 150,
@@ -15,7 +15,7 @@
   {
     "name": "Samsung Galaxy S25 Ultra",
     "category": "Phones",
-    "price": 69999.0,
+    "price": 62999.1,
     "discount_rate": 0.05,
     "description": "Galaxy AI-powered flagship with S Pen, 200MP camera, Snapdragon 8 Elite processor.",
     "stock_simulated": 200,
@@ -28,7 +28,7 @@
   {
     "name": "Google Pixel 9 Pro",
     "category": "Phones",
-    "price": 44999.0,
+    "price": 40499.1,
     "discount_rate": 0.1,
     "description": "Google's AI-first phone with Tensor G4, Magic Eraser, and best-in-class computational photography.",
     "stock_simulated": 120,
@@ -41,7 +41,7 @@
   {
     "name": "OnePlus 13",
     "category": "Phones",
-    "price": 34999.0,
+    "price": 31499.1,
     "discount_rate": 0.08,
     "description": "Flagship killer with Snapdragon 8 Elite, 100W charging, 6000mAh battery, Hasselblad cameras.",
     "stock_simulated": 180,
@@ -54,7 +54,7 @@
   {
     "name": "Xiaomi 15 Pro",
     "category": "Phones",
-    "price": 29999.0,
+    "price": 26999.1,
     "discount_rate": 0.12,
     "description": "Leica optics, Snapdragon 8 Elite, 120W HyperCharge, AMOLED display.",
     "stock_simulated": 250,
@@ -67,7 +67,7 @@
   {
     "name": "Nothing Phone (3)",
     "category": "Phones",
-    "price": 24999.0,
+    "price": 22499.1,
     "discount_rate": 0.0,
     "description": "Unique Glyph interface, transparent design, Snapdragon 7+ Gen 3, clean Nothing OS.",
     "stock_simulated": 100,
@@ -80,7 +80,7 @@
   {
     "name": "Samsung Galaxy Z Fold 6",
     "category": "Phones",
-    "price": 64999.0,
+    "price": 58499.1,
     "discount_rate": 0.15,
     "description": "Foldable flagship with 7.6-inch inner display, Galaxy AI features, and S Pen support.",
     "stock_simulated": 80,
@@ -93,7 +93,7 @@
   {
     "name": "ASUS ROG Phone 9",
     "category": "Phones",
-    "price": 39999.0,
+    "price": 35999.1,
     "discount_rate": 0.07,
     "description": "Ultimate gaming phone with AeroActive cooler, 165Hz AMOLED, 6000mAh battery.",
     "stock_simulated": 90,
@@ -106,7 +106,7 @@
   {
     "name": "Realme GT 7 Pro",
     "category": "Phones",
-    "price": 19999.0,
+    "price": 17999.1,
     "discount_rate": 0.1,
     "description": "Mid-range champion with Snapdragon 8 Elite, 120Hz display, 5800mAh battery.",
     "stock_simulated": 300,
@@ -119,7 +119,7 @@
   {
     "name": "Sony Xperia 1 VI",
     "category": "Phones",
-    "price": 49999.0,
+    "price": 44999.1,
     "discount_rate": 0.05,
     "description": "Creator's phone with 4K OLED, real-time eye AF, CineAlta video recording.",
     "stock_simulated": 60,
@@ -132,7 +132,7 @@
   {
     "name": "MacBook Pro 16\" M4 Max",
     "category": "Laptops",
-    "price": 124999.0,
+    "price": 112499.1,
     "discount_rate": 0.0,
     "description": "Apple silicon M4 Max, 48GB unified memory, 40-core GPU, Liquid Retina XDR display.",
     "stock_simulated": 50,
@@ -145,7 +145,7 @@
   {
     "name": "MacBook Air 15\" M4",
     "category": "Laptops",
-    "price": 54999.0,
+    "price": 49499.1,
     "discount_rate": 0.05,
     "description": "Fanless design, M4 chip, 18-hour battery, 15.3-inch Liquid Retina display.",
     "stock_simulated": 120,
@@ -158,7 +158,7 @@
   {
     "name": "Dell XPS 16 (2025)",
     "category": "Laptops",
-    "price": 64999.0,
+    "price": 58499.1,
     "discount_rate": 0.1,
     "description": "Intel Core Ultra, OLED touchscreen, edge-to-edge keyboard, premium CNC aluminum.",
     "stock_simulated": 80,
@@ -171,7 +171,7 @@
   {
     "name": "Lenovo ThinkPad X1 Carbon Gen 12",
     "category": "Laptops",
-    "price": 59999.0,
+    "price": 53999.1,
     "discount_rate": 0.08,
     "description": "Business ultrabook with Intel vPro, 14-inch 2.8K OLED, TrackPoint, MIL-STD durability.",
     "stock_simulated": 100,
@@ -184,7 +184,7 @@
   {
     "name": "ASUS ROG Zephyrus G16",
     "category": "Laptops",
-    "price": 79999.0,
+    "price": 71999.1,
     "discount_rate": 0.12,
     "description": "RTX 5080, Intel Core Ultra 9, 240Hz OLED, ultra-slim gaming laptop.",
     "stock_simulated": 60,
@@ -197,7 +197,7 @@
   {
     "name": "HP Spectre x360 16",
     "category": "Laptops",
-    "price": 49999.0,
+    "price": 44999.1,
     "discount_rate": 0.15,
     "description": "2-in-1 convertible with Intel Core Ultra, 3K OLED touchscreen, stylus support.",
     "stock_simulated": 90,
@@ -210,7 +210,7 @@
   {
     "name": "Razer Blade 16 (2025)",
     "category": "Laptops",
-    "price": 99999.0,
+    "price": 89999.1,
     "discount_rate": 0.05,
     "description": "RTX 5090, 16-inch QHD+ 240Hz, CNC aluminum unibody, per-key RGB.",
     "stock_simulated": 40,
@@ -223,7 +223,7 @@
   {
     "name": "MSI Stealth 18 AI Studio",
     "category": "Laptops",
-    "price": 89999.0,
+    "price": 80999.1,
     "discount_rate": 0.1,
     "description": "RTX 5080, 18-inch Mini LED, Intel Core Ultra 9, Studio-certified for creators.",
     "stock_simulated": 55,
@@ -236,7 +236,7 @@
   {
     "name": "Acer Swift Go 14",
     "category": "Laptops",
-    "price": 24999.0,
+    "price": 22499.1,
     "discount_rate": 0.2,
     "description": "Budget ultrabook with Intel Core Ultra 5, 14-inch WQXGA IPS, all-day battery.",
     "stock_simulated": 200,
@@ -249,7 +249,7 @@
   {
     "name": "Samsung Galaxy Book4 Ultra",
     "category": "Laptops",
-    "price": 74999.0,
+    "price": 67499.1,
     "discount_rate": 0.08,
     "description": "Intel Core Ultra 9, RTX 4070, 16-inch 3K AMOLED, Galaxy ecosystem integration.",
     "stock_simulated": 70,
@@ -262,7 +262,7 @@
   {
     "name": "Sony WH-1000XM6",
     "category": "Headphones",
-    "price": 14999.0,
+    "price": 13499.1,
     "discount_rate": 0.0,
     "description": "Industry-leading ANC, 40-hour battery, LDAC hi-res, multipoint connection, speak-to-chat.",
     "stock_simulated": 300,
@@ -275,7 +275,7 @@
   {
     "name": "Apple AirPods Max (2025)",
     "category": "Headphones",
-    "price": 19999.0,
+    "price": 17999.1,
     "discount_rate": 0.05,
     "description": "USB-C, H2 chip, Adaptive Audio, premium aluminum and stainless steel build.",
     "stock_simulated": 150,
@@ -288,7 +288,7 @@
   {
     "name": "Bose QuietComfort Ultra",
     "category": "Headphones",
-    "price": 12999.0,
+    "price": 11699.1,
     "discount_rate": 0.1,
     "description": "Immersive spatial audio, world-class ANC, plush comfort, 24-hour battery.",
     "stock_simulated": 200,
@@ -301,7 +301,7 @@
   {
     "name": "Sennheiser Momentum 5",
     "category": "Headphones",
-    "price": 13999.0,
+    "price": 12599.1,
     "discount_rate": 0.08,
     "description": "Audiophile-grade wireless with 42mm transducers, adaptive ANC, genuine leather.",
     "stock_simulated": 120,
@@ -314,7 +314,7 @@
   {
     "name": "Apple AirPods Pro 3",
     "category": "Headphones",
-    "price": 9999.0,
+    "price": 8999.1,
     "discount_rate": 0.0,
     "description": "H3 chip, Adaptive Transparency, personalized spatial audio, hearing health features.",
     "stock_simulated": 400,
@@ -327,7 +327,7 @@
   {
     "name": "Samsung Galaxy Buds3 Pro",
     "category": "Headphones",
-    "price": 7499.0,
+    "price": 6749.1,
     "discount_rate": 0.12,
     "description": "Blade-design, 2-way speakers, 360 Audio, intelligent ANC, Galaxy AI integration.",
     "stock_simulated": 250,
@@ -340,7 +340,7 @@
   {
     "name": "Beyerdynamic DT 900 Pro X",
     "category": "Headphones",
-    "price": 8999.0,
+    "price": 8099.1,
     "discount_rate": 0.0,
     "description": "Open-back studio reference headphones, STELLAR.45 driver, velour earpads.",
     "stock_simulated": 80,
@@ -353,7 +353,7 @@
   {
     "name": "JBL Tour One M3",
     "category": "Headphones",
-    "price": 6999.0,
+    "price": 6299.1,
     "discount_rate": 0.15,
     "description": "True adaptive ANC, hi-res wireless, spatial sound, 50-hour battery.",
     "stock_simulated": 180,
@@ -366,7 +366,7 @@
   {
     "name": "Audio-Technica ATH-M50xBT2",
     "category": "Headphones",
-    "price": 5999.0,
+    "price": 5399.1,
     "discount_rate": 0.1,
     "description": "Studio monitor wireless, 45mm large-aperture drivers, low-latency mode.",
     "stock_simulated": 150,
@@ -379,7 +379,7 @@
   {
     "name": "Nothing Ear (3)",
     "category": "Headphones",
-    "price": 4999.0,
+    "price": 4499.1,
     "discount_rate": 0.0,
     "description": "Transparent design, ChatGPT integration, Hi-Res certified, smart ANC.",
     "stock_simulated": 200,
@@ -392,7 +392,7 @@
   {
     "name": "Apple Watch Ultra 3",
     "category": "Smartwatches",
-    "price": 29999.0,
+    "price": 26999.1,
     "discount_rate": 0.0,
     "description": "Titanium case, S10 chip, satellite connectivity, 72-hour battery, depth gauge.",
     "stock_simulated": 80,
@@ -405,7 +405,7 @@
   {
     "name": "Samsung Galaxy Watch 7 Ultra",
     "category": "Smartwatches",
-    "price": 19999.0,
+    "price": 17999.1,
     "discount_rate": 0.05,
     "description": "Titanium Grade 4, dual-frequency GPS, Galaxy AI health insights, 60-hour battery.",
     "stock_simulated": 100,
@@ -418,7 +418,7 @@
   {
     "name": "Apple Watch Series 10",
     "category": "Smartwatches",
-    "price": 16999.0,
+    "price": 15299.1,
     "discount_rate": 0.08,
     "description": "Thinnest Apple Watch ever, wide-angle OLED, sleep apnea detection, water temp sensor.",
     "stock_simulated": 200,
@@ -431,7 +431,7 @@
   {
     "name": "Garmin Fenix 8",
     "category": "Smartwatches",
-    "price": 34999.0,
+    "price": 31499.1,
     "discount_rate": 0.1,
     "description": "AMOLED display, built-in speaker/mic, dive-ready, multi-band GPS, 29-day battery.",
     "stock_simulated": 60,
@@ -444,7 +444,7 @@
   {
     "name": "Google Pixel Watch 3",
     "category": "Smartwatches",
-    "price": 14999.0,
+    "price": 13499.1,
     "discount_rate": 0.12,
     "description": "Fitbit integration, Wear OS 5, AI-powered running insights, ECG and EDA sensors.",
     "stock_simulated": 120,
@@ -457,7 +457,7 @@
   {
     "name": "Garmin Venu 4",
     "category": "Smartwatches",
-    "price": 12999.0,
+    "price": 11699.1,
     "discount_rate": 0.0,
     "description": "Bright AMOLED, advanced sleep coaching, Body Battery energy, 11-day battery.",
     "stock_simulated": 150,
@@ -470,7 +470,7 @@
   {
     "name": "Withings ScanWatch Nova",
     "category": "Smartwatches",
-    "price": 17999.0,
+    "price": 16199.1,
     "discount_rate": 0.05,
     "description": "Luxury hybrid smartwatch, ECG, SpO2, temperature tracking, 30-day battery.",
     "stock_simulated": 70,
@@ -483,7 +483,7 @@
   {
     "name": "Amazfit T-Rex 3",
     "category": "Smartwatches",
-    "price": 8999.0,
+    "price": 8099.1,
     "discount_rate": 0.15,
     "description": "Military-grade rugged watch, AMOLED, 48-day battery, free offline maps.",
     "stock_simulated": 180,
@@ -496,7 +496,7 @@
   {
     "name": "Huawei Watch GT 5 Pro",
     "category": "Smartwatches",
-    "price": 11999.0,
+    "price": 10799.1,
     "discount_rate": 0.08,
     "description": "Golf course maps, free diving mode, ECG, titanium case, 14-day battery.",
     "stock_simulated": 130,
@@ -509,7 +509,7 @@
   {
     "name": "Samsung Galaxy Ring",
     "category": "Smartwatches",
-    "price": 13999.0,
+    "price": 12599.1,
     "discount_rate": 0.0,
     "description": "Titanium smart ring, 24/7 health monitoring, sleep tracking, 7-day battery.",
     "stock_simulated": 90,
@@ -522,7 +522,7 @@
   {
     "name": "Sony Alpha A7R V",
     "category": "Cameras",
-    "price": 109999.0,
+    "price": 98999.1,
     "discount_rate": 0.05,
     "description": "61MP full-frame, AI-based AF, 8K video, 5-axis IBIS, dual card slots.",
     "stock_simulated": 30,
@@ -535,7 +535,7 @@
   {
     "name": "Canon EOS R5 Mark II",
     "category": "Cameras",
-    "price": 129999.0,
+    "price": 116999.1,
     "discount_rate": 0.0,
     "description": "45MP full-frame, 8K 60p RAW, eye-control AF, DIGIC X processor.",
     "stock_simulated": 25,
@@ -548,7 +548,7 @@
   {
     "name": "Fujifilm X-T50",
     "category": "Cameras",
-    "price": 44999.0,
+    "price": 40499.1,
     "discount_rate": 0.1,
     "description": "40.2MP X-Trans CMOS 5 HR, film simulation dial, compact retro body.",
     "stock_simulated": 80,
@@ -561,7 +561,7 @@
   {
     "name": "Nikon Z6 III",
     "category": "Cameras",
-    "price": 84999.0,
+    "price": 76499.1,
     "discount_rate": 0.08,
     "description": "24.5MP full-frame, partially stacked CMOS, 6K video, dual EXPEED 7 processors.",
     "stock_simulated": 45,
@@ -574,7 +574,7 @@
   {
     "name": "DJI Osmo Action 5 Pro",
     "category": "Cameras",
-    "price": 12999.0,
+    "price": 11699.1,
     "discount_rate": 0.12,
     "description": "4K/120fps action camera, dual OLED screens, 47m waterproof, magnetic mount.",
     "stock_simulated": 150,
@@ -587,7 +587,7 @@
   {
     "name": "GoPro HERO13 Black",
     "category": "Cameras",
-    "price": 14999.0,
+    "price": 13499.1,
     "discount_rate": 0.15,
     "description": "1/1.9\" sensor, HLG HDR video, magnetic latch mount, GP3 chip.",
     "stock_simulated": 200,
@@ -600,7 +600,7 @@
   {
     "name": "DJI Mini 4 Pro",
     "category": "Cameras",
-    "price": 29999.0,
+    "price": 26999.1,
     "discount_rate": 0.05,
     "description": "Sub-249g drone, 4K/100fps, omnidirectional obstacle sensing, 34-min flight time.",
     "stock_simulated": 100,
@@ -613,9 +613,9 @@
   {
     "name": "Insta360 X4",
     "category": "Cameras",
-    "price": 17999.0,
+    "price": 16199.1,
     "discount_rate": 0.1,
-    "description": "8K 360\u00b0 camera, AI-powered reframing, invisible selfie stick, waterproof to 10m.",
+    "description": "8K 360° camera, AI-powered reframing, invisible selfie stick, waterproof to 10m.",
     "stock_simulated": 90,
     "avg_rating": 4.3,
     "review_count": 78,
@@ -626,7 +626,7 @@
   {
     "name": "Sony ZV-E10 II",
     "category": "Cameras",
-    "price": 29999.0,
+    "price": 26999.1,
     "discount_rate": 0.08,
     "description": "26MP APS-C vlog camera, cinematic vlog setting, AI-based AF, 4K/60p.",
     "stock_simulated": 110,
@@ -639,7 +639,7 @@
   {
     "name": "Canon PowerShot V10",
     "category": "Cameras",
-    "price": 14999.0,
+    "price": 13499.1,
     "discount_rate": 0.2,
     "description": "Ultra-compact vlog camera, built-in stand, 4K video, wide-angle lens.",
     "stock_simulated": 130,
@@ -652,7 +652,7 @@
   {
     "name": "Apple iPad Pro M4 13\"",
     "category": "Accessories",
-    "price": 54999.0,
+    "price": 49499.1,
     "discount_rate": 0.05,
     "description": "Ultra-thin with M4 chip, tandem OLED, Apple Pencil Pro support, Thunderbolt.",
     "stock_simulated": 100,
@@ -665,7 +665,7 @@
   {
     "name": "Anker Prime 27,650mAh Power Bank",
     "category": "Accessories",
-    "price": 5999.0,
+    "price": 5399.1,
     "discount_rate": 0.1,
     "description": "250W output, smart digital display, aircraft-grade aluminum, USB-C PD 3.1.",
     "stock_simulated": 300,
@@ -678,7 +678,7 @@
   {
     "name": "Logitech MX Master 4",
     "category": "Accessories",
-    "price": 4999.0,
+    "price": 4499.1,
     "discount_rate": 0.0,
     "description": "Ergonomic wireless mouse, MagSpeed scroll, multi-device, USB-C, 70-day battery.",
     "stock_simulated": 250,
@@ -691,7 +691,7 @@
   {
     "name": "Samsung T9 Portable SSD 2TB",
     "category": "Accessories",
-    "price": 7999.0,
+    "price": 7199.1,
     "discount_rate": 0.15,
     "description": "2,000 MB/s read, IP65 dust/water resistant, 3m drop-resistant, hardware encryption.",
     "stock_simulated": 200,
@@ -704,7 +704,7 @@
   {
     "name": "Razer Huntsman V3 Pro",
     "category": "Accessories",
-    "price": 8499.0,
+    "price": 7649.1,
     "discount_rate": 0.08,
     "description": "Analog optical switches, adjustable actuation, magnetic wrist rest, Chroma RGB.",
     "stock_simulated": 120,
@@ -717,7 +717,7 @@
   {
     "name": "Apple Magic Keyboard with Touch ID",
     "category": "Accessories",
-    "price": 5499.0,
+    "price": 4949.1,
     "discount_rate": 0.0,
     "description": "Wireless with numeric keypad, Touch ID sensor, USB-C charging, low-profile keys.",
     "stock_simulated": 180,
@@ -730,7 +730,7 @@
   {
     "name": "CalDigit TS4 Thunderbolt 4 Dock",
     "category": "Accessories",
-    "price": 14999.0,
+    "price": 13499.1,
     "discount_rate": 0.05,
     "description": "18 ports, 98W PD charging, 2.5GbE, triple 4K display support.",
     "stock_simulated": 60,
@@ -743,7 +743,7 @@
   {
     "name": "Belkin MagSafe 3-in-1 Charger",
     "category": "Accessories",
-    "price": 4999.0,
+    "price": 4499.1,
     "discount_rate": 0.12,
     "description": "15W iPhone MagSafe, Apple Watch fast charge, AirPods pad, Qi2 compatible.",
     "stock_simulated": 220,
@@ -756,7 +756,7 @@
   {
     "name": "LG UltraGear 32\" 4K OLED Monitor",
     "category": "Accessories",
-    "price": 34999.0,
+    "price": 31499.1,
     "discount_rate": 0.1,
     "description": "4K 240Hz OLED, 0.03ms GtG, HDMI 2.1, DisplayPort 2.1, AMD FreeSync Premium Pro.",
     "stock_simulated": 50,
@@ -769,7 +769,7 @@
   {
     "name": "Elgato Stream Deck +",
     "category": "Accessories",
-    "price": 7499.0,
+    "price": 6749.1,
     "discount_rate": 0.0,
     "description": "8 LCD keys + 4 touch dials, customizable controls for streaming and productivity.",
     "stock_simulated": 140,

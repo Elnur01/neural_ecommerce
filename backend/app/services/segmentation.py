@@ -29,7 +29,7 @@ BUDGET_MATRIX = {
 }
 
 # ── Scenarios (WP-4) ──────────────────────────────────────────────────
-SCENARIOS = ['A_replacement', 'B_upgrade', 'C_gift', 'D_browse']
+SCENARIOS = ['A_replacement', 'B_upgrade', 'C_gift', 'D_browse', 'E_camera', 'F_watch', 'G_accessory']
 SCENARIO_CONFIG = {
     'A_replacement': {
         'label': {'en': 'Replacement need',  'tr': 'Acil ihtiyaç'},
@@ -61,6 +61,30 @@ SCENARIO_CONFIG = {
         'text': {
             'en': "You have a few minutes free and you're casually browsing a tech store. You have [BUDGET] TRY available but no specific need. Look around and buy something only if it genuinely catches your interest.",
             'tr': "Boş birkaç dakikanız var ve teknoloji mağazasında geziyorsunuz. [BUDGET] TL bütçeniz var ama belirli bir ihtiyacınız yok. Etrafa bakın ve sadece gerçekten ilgi çekici bir şey görürseniz alın."
+        }
+    },
+    'E_camera': {
+        'label': {'en': 'Photography setup', 'tr': 'Kamera arayışı'},
+        'intent_level': 'high',
+        'text': {
+            'en': "You've recently started a travel blog and need a high-quality camera or drone to take photos and videos for your posts. You have [BUDGET] TRY saved for this hobby. Browse the store to find the perfect camera equipment for your needs.",
+            'tr': "Yakın zamanda bir seyahat blogu açtınız ve gönderileriniz için kaliteli fotoğraf ve videolar çekmek üzere iyi bir kameraya veya drona ihtiyacınız var. Bu hobi için [BUDGET] TL bütçe ayırdınız. İhtiyaçlarınıza en uygun kamera ekipmanını seçin."
+        }
+    },
+    'F_watch': {
+        'label': {'en': 'Fitness tracking',  'tr': 'Sağlık ve spor'},
+        'intent_level': 'medium',
+        'text': {
+            'en': "You've committed to a new fitness routine and want a smart watch to track your workouts, heart rate, and progress. Your budget is [BUDGET] TRY. Look at the smartwatches available and pick the best one for your health goals.",
+            'tr': "Yeni bir spor rutinine başladınız ve antrenmanlarınızı, kalp ritminizi ve ilerlemenizi takip edecek bir akıllı saate ihtiyacınız var. Bütçeniz [BUDGET] TL. Mevcut akıllı saatleri inceleyin ve hedeflerinize en uygun olanı seçin."
+        }
+    },
+    'G_accessory': {
+        'label': {'en': 'Desk upgrade',      'tr': 'Çalışma alanı yükseltmesi'},
+        'intent_level': 'medium',
+        'text': {
+            'en': "Your work-from-home setup is lacking productivity and comfort. You want to buy some accessories (like a monitor, SSD, dock, or keyboard) to improve your workflow. You have [BUDGET] TRY to spend. Browse the accessories section and decide what upgrades to get.",
+            'tr': "Evden çalışma alanınızda verimlilik ve konfor eksikliği hissediyorsunuz. Çalışma ortamınızı iyileştirmek için bazı aksesuarlar (monitör, SSD, hub veya klavye gibi) satın almak istiyorsunuz. Bütçeniz [BUDGET] TL. Aksesuar bölümünü inceleyin ve hangilerini alacağınıza karar verin."
         }
     },
 }
@@ -99,7 +123,7 @@ def assign_budget(customer_id_seed: str, age_group: str, loyalty_tier: str) -> f
     return round(rng.uniform(low, high), 2)
 
 def assign_scenario(customer_id_seed: str) -> str:
-    scenario_idx = int(hashlib.md5(customer_id_seed.encode()).hexdigest(), 16) % 4
+    scenario_idx = int(hashlib.md5(customer_id_seed.encode()).hexdigest(), 16) % len(SCENARIOS)
     return SCENARIOS[scenario_idx]
 
 def compute_segments(
