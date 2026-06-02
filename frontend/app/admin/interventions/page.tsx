@@ -77,9 +77,12 @@ export default function InterventionsDashboard() {
 
   const PER_PAGE = 50;
 
+  const getToken = () => sessionStorage.getItem("admin_token") || "";
+
   const fetchStats = useCallback(async () => {
     try {
-      const { data } = await api.get<Stats>("/admin/interventions/stats");
+      const token = getToken();
+      const { data } = await api.get<Stats>(`/admin/interventions/stats?admin_token=${token}`);
       setStats(data);
     } catch {
       // stats are non-critical — silently ignore
@@ -90,7 +93,12 @@ export default function InterventionsDashboard() {
     setLoading(true);
     setError(null);
     try {
-      const params: Record<string, string | number> = { page: p, per_page: PER_PAGE };
+      const token = getToken();
+      const params: Record<string, string | number> = { 
+        page: p, 
+        per_page: PER_PAGE,
+        admin_token: token
+      };
       if (segmentFilter) params.segment  = segmentFilter;
       if (actionFilter)  params.action   = actionFilter;
       if (abFilter)      params.ab_group = abFilter;
