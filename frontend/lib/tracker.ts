@@ -268,6 +268,8 @@ class Tracker {
   private handleExitIntent = (e: MouseEvent): void => {
     if (e.clientY <= 0 && !this.counters.exit_intent_triggered) {
       this.counters.exit_intent_triggered = true;
+      this.track("exit_intent_shown");
+      this.flush();
     }
   };
 
