@@ -49,6 +49,26 @@ def adapt_segment(lstm_segment: str) -> str:
     return _SEGMENT_MAP.get(lstm_segment, "Browser")
 
 
+# Toggle between static messages and live LangGraph/Gemini LLM
+USE_STATIC_MESSAGES: bool = True
+
+_STATIC_MESSAGES: Dict[str, str] = {
+    "dynamic_discount": "We noticed you left items in your cart! Use code WELCOME10 for an extra 10% off your purchase.",
+    "social_proof":     "Items in your cart are in high demand. Complete your order now before they sell out!",
+    "info_guide":       "Need more information about the items in your cart? Complete your purchase now or contact our support team.",
+    "loyalty_reward":   "We appreciate your loyalty! Complete your order today and enjoy priority delivery.",
+    "generic_reminder": "Your items are waiting in your cart. Complete your purchase today!",
+}
+
+_ACTION_MAP: Dict[str, str] = {
+    "price_sensitive":    "dynamic_discount",
+    "needs_social_proof": "social_proof",
+    "comparison_shopping":"info_guide",
+    "loyal_returner":     "loyalty_reward",
+    "distracted":         "generic_reminder",
+}
+
+
 # ─── Agent singleton ─────────────────────────────────────────────────────────
 _agent = None
 _agent_ready: bool = False
@@ -128,9 +148,19 @@ def run_intervention(
           "langgraph_segment":   str,
         }
     """
-    _ensure_ready()
-
     langgraph_segment = adapt_segment(lstm_segment)
+
+    if USE_STATIC_MESSAGES:
+        action = _ACTION_MAP.get(lstm_segment, "generic_reminder")
+        message = _STATIC_MESSAGES.get(action, _STATIC_MESSAGES["generic_reminder"])
+        return {
+            "intervention_status": True,
+            "action":              action,
+            "message":             message,
+            "langgraph_segment":   langgraph_segment,
+        }
+
+    _ensure_ready()
 
     initial_state = {
         "session_id":          session_id,
