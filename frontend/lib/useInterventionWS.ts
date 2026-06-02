@@ -50,21 +50,24 @@ export function useInterventionWS(token: string | null): Intervention | null {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const wsUrl  = apiUrl.replace(/^http/, "ws") + `/ws/${sessionId}`;
 
+      console.log(`[WS] Connecting to: ${wsUrl}`);
       const ws = new WebSocket(wsUrl);
       wsRef.current = ws;
 
       ws.onmessage = (event: MessageEvent) => {
         try {
           const data = JSON.parse(event.data) as Intervention;
+          console.log("[WS] Message received:", data);
           if (data.type === "intervention") {
             setIntervention(data);
           }
-        } catch {
-          // non-JSON frames (e.g. "pong") — ignore
+        } catch (err) {
+          console.debug("[WS] Ignored non-JSON message:", event.data);
         }
       };
 
-      ws.onclose = () => {
+      ws.onclose = (event) => {
+        console.log(`[WS] Connection closed (code: ${event.code})`);
         if (pingRef.current) clearInterval(pingRef.current);
         if (activeRef.current) {
           reconnectRef.current = setTimeout(connect, RECONNECT_DELAY_MS);
@@ -72,6 +75,7 @@ export function useInterventionWS(token: string | null): Intervention | null {
       };
 
       ws.onopen = () => {
+        console.log("[WS] Connection opened successfully");
         pingRef.current = setInterval(() => {
           if (ws.readyState === WebSocket.OPEN) ws.send("ping");
         }, PING_INTERVAL_MS);

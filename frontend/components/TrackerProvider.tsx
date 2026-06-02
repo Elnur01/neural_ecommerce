@@ -24,10 +24,16 @@ export default function TrackerProvider({ children }: { children: React.ReactNod
   const [activeIntervention, setActiveIntervention] = useState<Intervention | null>(null);
 
   useEffect(() => {
-    if (latestIntervention) setActiveIntervention(latestIntervention);
+    if (latestIntervention) {
+      console.log("[TrackerProvider] Setting active intervention:", latestIntervention);
+      setActiveIntervention(latestIntervention);
+    }
   }, [latestIntervention]);
 
-  const handleDismiss = useCallback(() => setActiveIntervention(null), []);
+  const handleDismiss = useCallback(() => {
+    console.log("[TrackerProvider] Dismissing active intervention");
+    setActiveIntervention(null);
+  }, []);
 
   // Initialize tracker when authenticated
   useEffect(() => {
