@@ -41,9 +41,19 @@ class Settings:
     # ── Admin ────────────────────────────────────────────────────────
     ADMIN_PIN: str = os.getenv("ADMIN_PIN", "research2026")
 
+    # ── LSTM Inference ────────────────────────────────────────────────
+    LSTM_CHECKPOINT_PATH:  str = os.getenv("LSTM_CHECKPOINT_PATH", "")
+    LSTM_SESSIONS_CSV:     str = os.getenv("LSTM_SESSIONS_CSV", "")
+    LSTM_DEMOGRAPHICS_CSV: str = os.getenv("LSTM_DEMOGRAPHICS_CSV", "")
+
+    # ── LangGraph Agent ───────────────────────────────────────────────
+    GEMINI_API_KEY:        str = os.getenv("GEMINI_API_KEY", "")
+    LANGGRAPH_AGENT_DIR:   str = os.getenv("LANGGRAPH_AGENT_DIR", "")
+
     # ── General ───────────────────────────────────────────────────────
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
     SENTRY_DSN: str = os.getenv("SENTRY_DSN", "")
+
 
 
 settings = Settings()

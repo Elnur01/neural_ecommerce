@@ -5,13 +5,14 @@ Events router — batched event ingestion for the sequential research dataset.
 import uuid
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from sqlalchemy.orm import Session as DBSession
 
 from app.database import get_db
 from app.models.models import Event, Session, User, Product, Order
 from app.schemas.schemas import EventBatchCreate, SessionCreate
 from app.routers.auth import get_current_user
+from app.services import trigger_service
 
 router = APIRouter()
 
@@ -36,6 +37,7 @@ def create_session(
 @router.post("", status_code=status.HTTP_201_CREATED)
 def ingest_events(
     body: EventBatchCreate,
+    background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     db: DBSession = Depends(get_db),
 ):
@@ -72,7 +74,24 @@ def ingest_events(
         db.add(event)
 
     db.commit()
+
+    # After every EVENT_TRIGGER_EVERY accumulated events in a session, fire abandonment check
+    unique_session_ids = {evt.session_id for evt in body.events}
+    for sess_id in unique_session_ids:
+        event_count = (
+            db.query(Event)
+            .filter(Event.session_id == sess_id)
+            .count()
+        )
+        if event_count > 0 and event_count % trigger_service.EVENT_TRIGGER_EVERY == 0:
+            background_tasks.add_task(
+                trigger_service.run_abandonment_check,
+                str(current_user.customer_id),
+                str(sess_id),
+            )
+
     return {"inserted": len(body.events)}
+
 
 
 @router.post("/sessions/{session_id}/close")

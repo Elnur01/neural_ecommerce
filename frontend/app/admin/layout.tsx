@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { href: "/admin/participants", label: "Participants", icon: "👥" },
   { href: "/admin/sessions", label: "Sessions", icon: "🔗" },
   { href: "/admin/events", label: "Events", icon: "📋" },
+  { href: "/admin/interventions", label: "Interventions", icon: "🤖" },
   { href: "/admin/orders", label: "Orders", icon: "🛒" },
   { href: "/admin/surveys", label: "Surveys", icon: "📝" },
   { href: "/admin/export", label: "Export", icon: "📥" },

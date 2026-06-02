@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import tracker from "@/lib/tracker";
 import { useCartStore, useAuthStore } from "@/lib/store";
+import { useInterventionWS } from "@/lib/useInterventionWS";
+import type { Intervention } from "@/lib/useInterventionWS";
+import InterventionPopup from "@/components/InterventionPopup";
 
 /**
  * TrackerProvider — initializes the event tracking SDK and
@@ -15,6 +18,16 @@ export default function TrackerProvider({ children }: { children: React.ReactNod
   const pathname = usePathname();
   const { cart } = useCartStore();
   const token = useAuthStore((state) => state.token);
+
+  // ── Real-time intervention from LangGraph agent ───────────────────────────
+  const latestIntervention = useInterventionWS(token);
+  const [activeIntervention, setActiveIntervention] = useState<Intervention | null>(null);
+
+  useEffect(() => {
+    if (latestIntervention) setActiveIntervention(latestIntervention);
+  }, [latestIntervention]);
+
+  const handleDismiss = useCallback(() => setActiveIntervention(null), []);
 
   // Initialize tracker when authenticated
   useEffect(() => {
@@ -49,5 +62,10 @@ export default function TrackerProvider({ children }: { children: React.ReactNod
     }
   }, [pathname, token]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <InterventionPopup intervention={activeIntervention} onDismiss={handleDismiss} />
+    </>
+  );
 }

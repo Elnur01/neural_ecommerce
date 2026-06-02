@@ -354,3 +354,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+@keyframes shrink-width {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+.intervention-progress {
+  animation: shrink-width linear forwards;
+}
+

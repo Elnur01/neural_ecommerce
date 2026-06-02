@@ -19,6 +19,33 @@ export default function CartPage() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    const autoCoupon = localStorage.getItem("applied_coupon");
+    if (autoCoupon && cart && !couponResult && !couponLoading) {
+      setCouponCode(autoCoupon);
+      const validate = async () => {
+        setCouponLoading(true);
+        try {
+          const { data } = await api.post<CouponValidation>("/coupons/validate", { code: autoCoupon });
+          setCouponResult(data);
+          tracker.markCouponSearched("apply", {
+            code_attempted: autoCoupon,
+            apply_success: data.valid,
+            discount_amount: data.valid && data.discount_pct ? cart.subtotal * data.discount_pct : 0,
+            cart_total_at_event: cart.subtotal,
+            items_in_cart: cart.items.length,
+          });
+          localStorage.removeItem("applied_coupon");
+        } catch {
+          setCouponResult({ valid: false, discount_pct: null, message: "Failed to validate coupon." });
+        } finally {
+          setCouponLoading(false);
+        }
+      };
+      validate();
+    }
+  }, [cart, couponResult, couponLoading]);
+
   const handleCouponValidate = async () => {
     if (!couponCode.trim()) return;
     setCouponLoading(true);

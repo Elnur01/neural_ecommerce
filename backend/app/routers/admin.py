@@ -29,6 +29,7 @@ from app.models.models import (
     CartItem,
     Coupon,
     PostSessionSurvey,
+    InterventionLog,
 )
 
 router = APIRouter()
@@ -687,6 +688,7 @@ TABLE_MAP = {
     "order_items": OrderItem,
     "surveys": PostSessionSurvey,
     "coupons": Coupon,
+    "intervention_logs": InterventionLog,
 }
 
 
@@ -720,3 +722,105 @@ def export_csv(
             "Content-Disposition": f"attachment; filename={table_name}_{datetime.now().strftime('%Y%m%d')}.csv"
         },
     )
+
+
+# ══════════════════════════════════════════════════════════════════════
+# REAL-TIME AI INTERVENTIONS
+# ══════════════════════════════════════════════════════════════════════
+
+def _log_to_dict(log: InterventionLog) -> dict:
+    return {
+        "log_id":                   str(log.log_id),
+        "session_id":               str(log.session_id),
+        "user_id":                  str(log.user_id),
+        "segment":                  log.segment,
+        "abandonment_probability":  round(log.abandonment_probability, 4),
+        "cart_value":               round(log.cart_value, 2),
+        "action":                   log.action,
+        "message":                  log.message,
+        "ab_group":                 log.ab_group,
+        "timestamp":                log.timestamp.isoformat() if log.timestamp else None,
+    }
+
+
+@router.get("/interventions")
+def list_interventions(
+    page:     int            = Query(1,    ge=1),
+    per_page: int            = Query(50,   ge=1, le=200),
+    segment:  Optional[str]  = Query(None),
+    action:   Optional[str]  = Query(None),
+    ab_group: Optional[str]  = Query(None),
+    _: bool = Depends(_verify_admin),
+    db: DBSession = Depends(get_db),
+):
+    """
+    Return a paginated list of all intervention decisions (both A/B groups).
+    """
+    q = db.query(InterventionLog).order_by(InterventionLog.timestamp.desc())
+
+    if segment:
+        q = q.filter(InterventionLog.segment == segment)
+    if action:
+        q = q.filter(InterventionLog.action == action)
+    if ab_group:
+        q = q.filter(InterventionLog.ab_group == ab_group)
+
+    total = q.count()
+    logs  = q.offset((page - 1) * per_page).limit(per_page).all()
+
+    return {
+        "total":    total,
+        "page":     page,
+        "per_page": per_page,
+        "items":    [_log_to_dict(log) for log in logs],
+    }
+
+
+@router.get("/interventions/stats")
+def intervention_stats(
+    _: bool = Depends(_verify_admin),
+    db: DBSession = Depends(get_db),
+):
+    """
+    Return aggregate statistics for monitoring and A/B analysis.
+    """
+    total = db.query(func.count(InterventionLog.log_id)).scalar() or 0
+
+    # A/B group counts
+    ab_rows = (
+        db.query(InterventionLog.ab_group, func.count(InterventionLog.log_id))
+        .group_by(InterventionLog.ab_group)
+        .all()
+    )
+    ab_breakdown = {row[0]: row[1] for row in ab_rows}
+
+    # Segment breakdown (all groups)
+    seg_rows = (
+        db.query(InterventionLog.segment, func.count(InterventionLog.log_id))
+        .group_by(InterventionLog.segment)
+        .all()
+    )
+    segment_breakdown = {row[0]: row[1] for row in seg_rows}
+
+    # Action breakdown (treatment only — control has NULL action)
+    action_rows = (
+        db.query(InterventionLog.action, func.count(InterventionLog.log_id))
+        .filter(InterventionLog.ab_group == "treatment", InterventionLog.action.isnot(None))
+        .group_by(InterventionLog.action)
+        .all()
+    )
+    action_breakdown = {row[0]: row[1] for row in action_rows}
+
+    # Averages
+    avg_prob = db.query(func.avg(InterventionLog.abandonment_probability)).scalar()
+    avg_cart = db.query(func.avg(InterventionLog.cart_value)).scalar()
+
+    return {
+        "total":               total,
+        "ab_breakdown":        ab_breakdown,
+        "segment_breakdown":   segment_breakdown,
+        "action_breakdown":    action_breakdown,
+        "avg_abandonment_prob": round(float(avg_prob), 4) if avg_prob else 0.0,
+        "avg_cart_value":       round(float(avg_cart), 2) if avg_cart else 0.0,
+    }
+

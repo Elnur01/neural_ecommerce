@@ -49,4 +49,10 @@ uvloop==0.22.1
 watchfiles==1.1.1
 websockets==16.0
 sentry-sdk[fastapi]>=2.8.0
+torch
+scikit-learn
+langchain
+langchain-google-genai
+langgraph
+
 

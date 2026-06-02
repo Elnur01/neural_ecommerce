@@ -5,14 +5,16 @@ Cart router — CRUD operations for the user's shopping cart.
 import uuid
 from decimal import Decimal
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from sqlalchemy.orm import Session as DBSession
 
 from app.database import get_db
-from app.models.models import Cart, CartItem, Product, User
+from app.models.models import Cart, CartItem, Product, User, Session as UserSession
 from app.schemas.schemas import CartItemCreate, CartItemUpdate, CartItemOut, CartOut
 from app.routers.auth import get_current_user
 from app.services.checkout import get_stable_shipping_fee, calculate_tax
+from app.services import trigger_service
+
 
 router = APIRouter()
 
@@ -73,6 +75,7 @@ def get_cart(
 @router.post("/items", response_model=CartOut, status_code=status.HTTP_201_CREATED)
 def add_to_cart(
     body: CartItemCreate,
+    background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     db: DBSession = Depends(get_db),
 ):
@@ -109,7 +112,25 @@ def add_to_cart(
     db.commit()
     db.refresh(cart)
 
+    # Fire abandonment check in background using the user's latest open session
+    latest_session = (
+        db.query(UserSession)
+        .filter(
+            UserSession.customer_id == current_user.customer_id,
+            UserSession.ended_at.is_(None),
+        )
+        .order_by(UserSession.started_at.desc())
+        .first()
+    )
+    if latest_session:
+        background_tasks.add_task(
+            trigger_service.run_abandonment_check,
+            str(current_user.customer_id),
+            str(latest_session.session_id),
+        )
+
     return _build_cart_response(cart, db)
+
 
 
 @router.patch("/items/{item_id}", response_model=CartOut)
